@@ -23,6 +23,7 @@ Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::prefix('Pengirim/')->group(function () {
     Route::get('show/', 'PengirimController@index')->name('pengirim.index');
     Route::post('inserting/', 'PengirimController@insert')->name('pengirim.insert');
-    Route::get('edit/{pengirim}', 'PengirimController@edit_data')->name('pengirim.edit');
-    Route::post('update', 'PengirimController@update')->name('pengirim.update');
+    Route::get('edit/{id}', 'PengirimController@edit_data')->name('pengirim.edit');
+    Route::patch('update/{id}', 'PengirimController@update')->name('pengirim.update');
+    Route::delete('delete/{id}', 'PengirimController@destroy')->name('pengirim.destroy');
 });

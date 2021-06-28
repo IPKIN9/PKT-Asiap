@@ -46,10 +46,10 @@ class PengirimController extends Controller
         return response()->json($post);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $data = array(
-            'name' => $request->input('name'),
+            'nama' => $request->input('nama'),
             'alamat' => $request->input('alamat'),
             'hp' => $request->input('hp'),
             'berat' => $request->input('berat'),
@@ -57,7 +57,13 @@ class PengirimController extends Controller
             'jumlah' => $request->input('jumlah'),
             'updated_at' => now()
         );
-        PengirimModel::where('id', $request->input('id'))->update($data);
-        return redirect(route('pengirim.index'))->with('status', 'Successfully to updating data');
+        PengirimModel::where('id', $id)->update($data);
+        return response()->json($data);
+    }
+
+    public function destroy($id)
+    {
+        $post = PengirimModel::where('id', $id)->delete();
+        return response()->json($post);
     }
 }
