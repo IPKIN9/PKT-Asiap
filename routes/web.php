@@ -27,3 +27,11 @@ Route::prefix('Pengirim/')->group(function () {
     Route::patch('update/{id}', 'PengirimController@update')->name('pengirim.update');
     Route::delete('delete/{id}', 'PengirimController@destroy')->name('pengirim.destroy');
 });
+
+Route::prefix('Supir/')->group(function () {
+    Route::get('show/', 'SupirController@index')->name('supir.index');
+    Route::post('inserting/', 'SupirController@insert')->name('supir.insert');
+    Route::get('edit/{id}', 'SupirController@edit_data')->name('supir.edit');
+    Route::patch('update/{id}', 'SupirController@update')->name('supir.update');
+    Route::delete('delete/{id}', 'SupirController@destroy')->name('supir.destroy');
+});
