@@ -27,6 +27,13 @@ Route::prefix('Pengirim/')->group(function () {
     Route::patch('update/{id}', 'PengirimController@update')->name('pengirim.update');
     Route::delete('delete/{id}', 'PengirimController@destroy')->name('pengirim.destroy');
 });
+Route::prefix('Lokasi/')->group(function () {
+    Route::get('show/', 'LokasiController@index')->name('lokasi.index');
+    Route::post('inserting/', 'LokasiController@insert')->name('lokasi.insert');
+    Route::get('edit/{id}', 'LokasiController@edit_data')->name('lokasi.edit');
+    Route::patch('update/{id}', 'LokasiController@update')->name('lokasi.update');
+    Route::delete('delete/{id}', 'LokasiController@destroy')->name('lokasi.destroy');
+});
 
 Route::prefix('Supir/')->group(function () {
     Route::get('show/', 'SupirController@index')->name('supir.index');
