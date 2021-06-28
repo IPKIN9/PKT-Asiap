@@ -27,3 +27,12 @@ Route::prefix('Pengirim/')->group(function () {
     Route::patch('update/{id}', 'PengirimController@update')->name('pengirim.update');
     Route::delete('delete/{id}', 'PengirimController@destroy')->name('pengirim.destroy');
 });
+
+//Mobil
+Route::prefix('Mobil/')->group(function () {
+    Route::get('show/', 'MobilController@index')->name('mobil.index');
+    Route::post('inserting/', 'MobilController@insert')->name('mobil.insert');
+    Route::get('edit/{id}', 'MobilController@edit_data')->name('mobil.edit');
+    Route::patch('update/{id}', 'MobilController@update')->name('mobil.update');
+    Route::delete('delete/{id}', 'MobilController@destroy')->name('mobil.destroy');
+});
