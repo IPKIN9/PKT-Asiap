@@ -34,3 +34,11 @@ Route::prefix('Lokasi/')->group(function () {
     Route::patch('update/{id}', 'LokasiController@update')->name('lokasi.update');
     Route::delete('delete/{id}', 'LokasiController@destroy')->name('lokasi.destroy');
 });
+
+Route::prefix('Supir/')->group(function () {
+    Route::get('show/', 'SupirController@index')->name('supir.index');
+    Route::post('inserting/', 'SupirController@insert')->name('supir.insert');
+    Route::get('edit/{id}', 'SupirController@edit_data')->name('supir.edit');
+    Route::patch('update/{id}', 'SupirController@update')->name('supir.update');
+    Route::delete('delete/{id}', 'SupirController@destroy')->name('supir.destroy');
+});

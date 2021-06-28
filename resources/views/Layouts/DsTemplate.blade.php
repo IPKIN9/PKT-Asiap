@@ -75,6 +75,26 @@
               class="{{ Route::is('pengirim.index') ? 'active' : '' }} btn btn-primary btn-lg btn-block btn-icon-split">
               <i class="fas fa-rocket"></i> Pengirim
             </a>
+            <a href="{{route('supir.index')}}"
+              class="{{ Route::is('supir.index') ? 'active' : '' }} btn btn-primary btn-lg btn-block btn-icon-split">
+              <i class="fas fa-rocket"></i> Supir
+            </a>
+            <a href="{{route('lokasi.index')}}"
+              class="{{ Route::is('lokasi.index') ? 'active' : '' }} btn btn-primary btn-lg btn-block btn-icon-split">
+              <i class="fas fa-rocket"></i> Lokasi
+            </a>
+            <a href="{{route('mobil.index')}}"
+              class="{{ Route::is('mobil.index') ? 'active' : '' }} btn btn-primary btn-lg btn-block btn-icon-split">
+              <i class="fas fa-rocket"></i> Mobil
+            </a>
+            <a href="{{route('pesan.index')}}"
+              class="{{ Route::is('pesan.index') ? 'active' : '' }} btn btn-primary btn-lg btn-block btn-icon-split">
+              <i class="fas fa-rocket"></i> Pesan
+            </a>
+            <a href="{{route('proses.index')}}"
+              class="{{ Route::is('proses.index') ? 'active' : '' }} btn btn-primary btn-lg btn-block btn-icon-split">
+              <i class="fas fa-rocket"></i> Proses
+            </a>
           </div>
         </aside>
       </div>
