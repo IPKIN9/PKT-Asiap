@@ -13,11 +13,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
+//Login & Register
+Route::get('/', 'AuthController@showFormLogin')->name('login');
+Route::get('login', 'AuthController@showFormLogin')->name('login');
+Route::post('login', 'AuthController@login');
+Route::get('register', 'AuthController@showFormRegister')->name('register');
+Route::post('register', 'AuthController@register');
+ 
+Route::group(['middleware' => 'auth'], function () {
+ 
+    Route::get('home', 'DashboardController@index')->name('home');
+    Route::get('logout', 'AuthController@logout')->name('logout');
+ 
+});
 
 // Pengirim
 Route::prefix('Pengirim/')->group(function () {
