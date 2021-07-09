@@ -63,10 +63,6 @@
           <div class="sidebar-brand sidebar-brand-sm">
             <a href="index.html">St</a>
           </div>
-          <ul class="sidebar-menu">
-            <li class="menu-header">Stisla</li>
-            <li><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank Page</span></a></li>
-          </ul>
           <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
             <a href="{{route('pengirim.index')}}"
               class="{{ Route::is('pengirim.index') ? 'active' : '' }} btn btn-primary btn-lg btn-block btn-icon-split">
