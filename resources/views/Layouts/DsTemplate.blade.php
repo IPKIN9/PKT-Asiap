@@ -37,7 +37,7 @@
           <li class="dropdown"><a href="#" data-toggle="dropdown"
               class="nav-link dropdown-toggle nav-link-lg nav-link-user">
               <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}" class="rounded-circle mr-1">
-              <div class="d-sm-none d-lg-inline-block">Hi, Ujang Maman</div>
+              <div class="d-sm-none d-lg-inline-block">{{ Auth::user()->name }}</div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
               <div class="dropdown-title">Logged in 5 min ago</div>
@@ -48,7 +48,7 @@
                 <i class="fas fa-cog"></i> Settings
               </a>
               <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item has-icon text-danger">
+              <a href="{{ Route('logout') }}" class="dropdown-item has-icon text-danger">
                 <i class="fas fa-sign-out-alt"></i> Logout
               </a>
             </div>
@@ -68,9 +68,6 @@
             <li><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank Page</span></a></li>
           </ul>
           <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-            <a href="" class="btn btn-primary btn-lg btn-block btn-icon-split">
-              <i class="fas fa-rocket"></i> Documentation
-            </a>
             <a href="{{route('pengirim.index')}}"
               class="{{ Route::is('pengirim.index') ? 'active' : '' }} btn btn-primary btn-lg btn-block btn-icon-split">
               <i class="fas fa-rocket"></i> Pengirim
@@ -86,14 +83,6 @@
             <a href="{{route('mobil.index')}}"
               class="{{ Route::is('mobil.index') ? 'active' : '' }} btn btn-primary btn-lg btn-block btn-icon-split">
               <i class="fas fa-rocket"></i> Mobil
-            </a>
-            <a href="{{route('pesan.index')}}"
-              class="{{ Route::is('pesan.index') ? 'active' : '' }} btn btn-primary btn-lg btn-block btn-icon-split">
-              <i class="fas fa-rocket"></i> Pesan
-            </a>
-            <a href="{{route('proses.index')}}"
-              class="{{ Route::is('proses.index') ? 'active' : '' }} btn btn-primary btn-lg btn-block btn-icon-split">
-              <i class="fas fa-rocket"></i> Proses
             </a>
           </div>
         </aside>
