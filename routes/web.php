@@ -56,4 +56,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::patch('update/{id}', 'MobilController@update')->name('mobil.update');
         Route::delete('delete/{id}', 'MobilController@destroy')->name('mobil.destroy');
     });
+    Route::prefix('Pesan/')->group(function () {
+        Route::get('show/', 'PesanController@index')->name('pesan.index');
+        Route::post('inserting/', 'PesanController@insert')->name('pesan.insert');
+        Route::get('edit/{id}', 'PesanController@edit_data')->name('pesan.edit');
+        Route::patch('update/{id}', 'PesanController@update')->name('pesan.update');
+        Route::delete('delete/{id}', 'PesanController@destroy')->name('pesan.destroy');
+    });
 });
