@@ -1,7 +1,7 @@
 @extends('layouts.DsTemplate')
 @section('content')
 <div class="row">
-    <div class="col-12">
+    <div class="col-lg-12">
         <div class="card">
             <div class="small">
                 @if (session('status'))
@@ -11,7 +11,7 @@
                 @endif
             </div>
             <div class="card-header">
-                <h4>Data Supir</h4>
+                <h4>Data Pesan</h4>
             </div>
             <div class="card-body">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -29,9 +29,8 @@
                         <table id="myTable" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Nama</th>
-                                    <th>No.Hp</th>
-                                    <th>Jenis Kelamin</th>
+                                    <th style="width: 500px;">Pesan</th>
+                                    <th>Type</th>
                                     <th>Created at</th>
                                     <th>Deleted at</th>
                                     <th>Action</th>
@@ -40,10 +39,9 @@
                             <tbody>
                                 @foreach($data as $d)
                                 <tr>
-                                    <th>{{$d->nama}}</th>
-                                    <th>{{$d->hp}}</th>
-                                    <th>{{$d->jk}}</th>
-                                    <th>{{date('d-m-Y', strtotime($d->created_at))}}</>
+                                    <th>{{$d->pesan}}</th>
+                                    <th>{{$d->type}}</th>
+                                    <th>{{date('d-m-Y', strtotime($d->created_at))}}</th>
                                     <th>{{date('d-m-Y', strtotime($d->updated_at))}}</th>
                                     <th>
                                         <button type="button" data-id="{{$d->id}}"
@@ -60,9 +58,8 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Nama</th>
-                                    <th>No.Hp</th>
-                                    <th>Jenis Kelamin</th>
+                                    <th>pesan</th>
+                                    <th>type</th>
                                     <th>Created at</th>
                                     <th>Deleted at</th>
                                     <th>Action</th>
@@ -72,48 +69,38 @@
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="col-12">
-                            <form action="{{route('supir.insert')}}" method="POST">
+                            <form action="{{route('pesan.insert')}}" method="POST">
                                 @csrf
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4>Buat data baru</h4>
+                                        <h4>Buat pesan baru</h4>
                                     </div>
                                     <div class="card-body">
                                         <form class="wizard-content mt-2">
                                             <div class="wizard-pane">
                                                 <div class="form-group row align-items-center">
-                                                    @error('nama')
+                                                    @error('type')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
-                                                    <label class="col-md-4 text-md-right text-left">Nama
-                                                        Supir</label>
+                                                    <label class="col-md-4 text-md-right text-left">Type</label>
                                                     <div class="col-lg-6 col-md-6">
-                                                        <input type="text" name="nama" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row align-items-center">
-                                                    @error('hp')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
-                                                    <label class="col-md-4 text-md-right text-left">Nomor Hp</label>
-                                                    <div class="col-lg-6 col-md-6">
-                                                        <input type="text" name="hp" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row align-items-center">
-                                                    @error('jk')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
-                                                    <label class="col-md-4 text-md-right text-left">jenis
-                                                        Kelamin</label>
-                                                    <div class="col-lg-6 col-md-6">
-                                                        <select class="form-control form-control-lg" name="jk">
-                                                            <option value="laki-laki">Laki-Laki</option>
-                                                            <option value="perempuan">Perempuan</option>
+                                                        <select class="form-control selectric" name="type">
+                                                            <option selected hidden>Pilih</option>
+                                                            <option value="tiba">Tiba</option>
+                                                            <option value="berangkat">Berangkat</option>
                                                         </select>
                                                     </div>
                                                 </div>
-
+                                                <div class="form-group row align-items-center">
+                                                    @error('pesan')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
+                                                    <label class="col-md-4 text-md-right text-left">Pesan</label>
+                                                    <div class="col-lg-8 col-md-8">
+                                                        <textarea class="summernote-ui" id="pesan" name="pesan"
+                                                            cols="40" rows="5"></textarea>
+                                                    </div>
+                                                </div>
                                                 <div class="form-group row">
                                                     <div class="col-md-4"></div>
                                                     <div class="col-lg-6 col-md-6 text-right">
@@ -169,7 +156,9 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        $('#myTable').DataTable();
+        $('#myTable').DataTable({
+            responsive:true
+        });
     });
 </script>
 <script>
@@ -183,38 +172,31 @@
                 $('#modalContent').append(`
             <div class="wizard-pane">
               <div class="form-group row align-items-center">
-                @error('nama')
+                @error('type')
                 <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
-                <label class="col-md-4 text-md-right text-left">Nama Pengirim</label>
+                <label class="col-md-4 text-md-right text-left">Type</label>
                 <div class="col-lg-6 col-md-6">
                   <input type="hidden" id="data_id" value="` + data.id + `" name="id" class="form-control">
-                  <input type="text" value="` + data.nama + `" name="nama" class="form-control">
+                  <select class="form-control selectric" value="` + data.type + `" name="type">
+                        <option selected hidden>Pilih</option>
+                        <option value="tiba">Tiba</option>
+                        <option value="berangkat">Berangkat</option>
+                    </select>
                 </div>
               </div>
               <div class="form-group row align-items-center">
-                  @error('hp')
+                  @error('pesan')
                 <div class="alert alert-danger">{{ $message }}</div>
                   @enderror
-                <label class="col-md-4 text-md-right text-left">Nomor Hp</label>
+                <label class="col-md-4 text-md-right text-left">Pesan</label>
                 <div class="col-lg-6 col-md-6">
-                  <input type="text" value="` + data.hp + `" name="hp" class="form-control">
-                </div>
-              </div>
-              <div class="form-group row align-items-center">
-                  @error('jk')
-                <div class="alert alert-danger">{{ $message }}</div>
-                  @enderror
-                <label class="col-md-4 text-md-right text-left">jenis kelamin</label>
-                <div class="col-lg-6 col-md-6">
-                  <select class="form-control form-control-lg" value="`+ data.jk +`" name="jk">
-                        <option value="laki-laki">Laki-Laki</option>
-                        <option value="perempuan">Perempuan</option>
-                 </select>
+                    <textarea class="summernote-ui" id="pesanid" name="pesan" cols="40" rows="5"></textarea>
                 </div>
               </div>
             </div>
            `);
+           $('#pesanid').val(data.pesan);
             })
         });
     });

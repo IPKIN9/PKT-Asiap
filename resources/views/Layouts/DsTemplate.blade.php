@@ -64,6 +64,10 @@
             <a href="index.html">St</a>
           </div>
           <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
+            <a href="{{route('pesan.index')}}"
+              class="{{ Route::is('pesan.index') ? 'active' : '' }} btn btn-primary btn-lg btn-block btn-icon-split">
+              <i class="fas fa-rocket"></i> Pesan
+            </a>
             <a href="{{route('pengirim.index')}}"
               class="{{ Route::is('pengirim.index') ? 'active' : '' }} btn btn-primary btn-lg btn-block btn-icon-split">
               <i class="fas fa-rocket"></i> Pengirim
