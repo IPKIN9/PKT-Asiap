@@ -84,6 +84,10 @@
               class="{{ Route::is('mobil.index') ? 'active' : '' }} btn btn-primary btn-lg btn-block btn-icon-split">
               <i class="fas fa-rocket"></i> Mobil
             </a>
+            <a href="{{route('kirim.index')}}"
+              class="{{ Route::is('kirim.index') ? 'active' : '' }} btn btn-primary btn-lg btn-block btn-icon-split">
+              <i class="fas fa-rocket"></i> Kirim Paket
+            </a>
           </div>
         </aside>
       </div>

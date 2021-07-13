@@ -63,4 +63,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::patch('update/{id}', 'PesanController@update')->name('pesan.update');
         Route::delete('delete/{id}', 'PesanController@destroy')->name('pesan.destroy');
     });
+    Route::prefix('Kirim/')->group(function () {
+        Route::get('show/', 'ProsesController@index')->name('kirim.index');
+    });
 });
