@@ -8,7 +8,7 @@ class ProsesModel extends Model
 {
     protected $table = 'proses';
     protected $fillable = [
-        'id', 'no_resi', 'pengirim_id', 'asal', 'tujuan',
+        'id', 'no_resi', 'pengirim_id', 'asal_id', 'tujuan_id',
         'no_hp', 'ket', 'supir_id', 'mobil_id', 'created_at', 'updated_at'
     ];
     public function pengirim_rol()
@@ -17,11 +17,11 @@ class ProsesModel extends Model
     }
     public function asal_rol()
     {
-        return $this->belongsTo(LokasiModel::class, 'asal');
+        return $this->belongsTo(LokasiModel::class, 'asal_id');
     }
     public function tujuan_rol()
     {
-        return $this->belongsTo(LokasiModel::class, 'tujuan');
+        return $this->belongsTo(LokasiModel::class, 'tujuan_id');
     }
     public function supir_rol()
     {

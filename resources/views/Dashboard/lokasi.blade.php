@@ -168,7 +168,7 @@
                 @error('nama')
                 <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
-                <label class="col-md-4 text-md-right text-left">Nama Pengirim</label>
+                <label class="col-md-4 text-md-right text-left">Cabang</label>
                 <div class="col-lg-6 col-md-6">
                   <input type="hidden" id="data_id" value="` + data.id + `" name="id" class="form-control">
                   <input type="text" value="` + data.cabang + `" name="cabang" class="form-control">
