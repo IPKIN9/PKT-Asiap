@@ -65,5 +65,9 @@ Route::group(['middleware' => 'auth'], function () {
     });
     Route::prefix('Kirim/')->group(function () {
         Route::get('show/', 'ProsesController@index')->name('kirim.index');
+        Route::post('inserting/', 'ProsesController@insert')->name('kirim.insert');
+        Route::get('edit/{id}', 'ProsesController@edit_data')->name('kirim.edit');
+        Route::patch('update/{id}', 'ProsesController@update')->name('kirim.update');
+        Route::delete('delete/{id}', 'ProsesController@destroy')->name('kirim.destroy');
     });
 });

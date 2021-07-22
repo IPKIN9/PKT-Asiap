@@ -43,8 +43,8 @@
                                 @foreach($data['proses'] as $d)
                                 <tr>
                                     <th>{{$d->no_resi}}</th>
-                                    <th>{{$d->pengirimi_rerol->nama}}</th>
-                                    <th>{{$d->tujuan_rerol->cabang}}</th>
+                                    <th>{{$d->pengirim_rol->nama}}</th>
+                                    <th>{{$d->tujuan_rol->cabang}}</th>
                                     <th>{{$d->no_hp}}</th>
                                     <th>{{$d->ket}}</th>
                                     <th>{{date('d-m-Y', strtotime($d->created_at))}}</th>
@@ -78,11 +78,11 @@
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="col-12">
-                            <form action="" method="POST">
+                            <form action="{{ Route('kirim.insert') }}" method="POST">
                                 @csrf
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4>BUat data baru</h4>
+                                        <h4>Buat data baru</h4>
                                     </div>
                                     <div class="card-body">
                                         <form class="wizard-content mt-2">
@@ -101,11 +101,11 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group row align-items-center">
-                                                    @error('asal')
+                                                    @error('asal_id')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
                                                     <label class="col-md-4 text-md-right text-left">Asal</label>
-                                                    <select name="asal" class="col-lg-6 col-md-6 form-control">
+                                                    <select name="asal_id" class="col-lg-6 col-md-6 form-control">
                                                         <option selected disabled>Pilih</option>
                                                         @foreach ($data['lokasi'] as $d)
                                                         <option value="{{$d->id}}">{{$d->cabang}}</option>
@@ -113,11 +113,11 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group row align-items-center">
-                                                    @error('tujuan')
+                                                    @error('tujuan_id')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
                                                     <label class="col-md-4 text-md-right text-left">Tujuan</label>
-                                                    <select name="tujuan" class="col-lg-6 col-md-6 form-control">
+                                                    <select name="tujuan_id" class="col-lg-6 col-md-6 form-control">
                                                         <option selected disabled>Pilih</option>
                                                         @foreach ($data['lokasi'] as $d)
                                                         <option value="{{$d->id}}">{{$d->cabang}}</option>
@@ -144,11 +144,11 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group row align-items-center">
-                                                    @error('supir')
+                                                    @error('supir_id')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
                                                     <label class="col-md-4 text-md-right text-left">Supir</label>
-                                                    <select name="supir" class="col-lg-6 col-md-6 form-control">
+                                                    <select name="supir_id" class="col-lg-6 col-md-6 form-control">
                                                         <option selected disabled>Pilih</option>
                                                         @foreach ($data['supir'] as $d)
                                                         <option value="{{$d->id}}">{{$d->nama}}</option>
@@ -189,7 +189,29 @@
 </div>
 @endsection
 @section('modal')
+<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="modal-title" class="modal-title">Modal title</h5>
+                <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <form id="form-edit">
+                    @csrf
+                    <div id="modalContent">
 
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer bg-whitesmoke br">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="md-update btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 @section('js')
 <script>
@@ -201,6 +223,131 @@
             }
         });
         $('#myTable').DataTable();
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('body').on('click', '.md-edit', function () {
+            let dataId = $(this).data('id');
+            $.get('edit/' + dataId, function (data) {
+                $('#modal-title').html("Edit Post");
+                $('#myModal').modal('show');
+                $('#modalContent').html('');
+                $('#modalContent').append(`
+            <div class="wizard-pane">
+              <div class="form-group row align-items-center">
+                @error('pengirim_id')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+                <label class="col-md-4 text-md-right text-left">Nama Pengirim</label>
+                <div class="col-lg-6 col-md-6">
+                  <input type="hidden" id="data_id" value="` + data.id + `" name="id" class="form-control">
+                  <select class="form-control form-control-lg" value="`+ data.pengirim +`" name="pengirim_id">
+                    <option selected disabled>Pilih</option>
+                    @foreach ($data['pengirim'] as $d)
+                    <option value="{{$d->id}}">{{$d->nama}}</option>
+                    @endforeach
+                 </select>
+                </div>
+              </div>
+              <div class="form-group row align-items-center">
+                  @error('hp')
+                <div class="alert alert-danger">{{ $message }}</div>
+                  @enderror
+                <label class="col-md-4 text-md-right text-left">Nomor Hp</label>
+                <div class="col-lg-6 col-md-6">
+                  <input type="text" value="` + data.hp + `" name="hp" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row align-items-center">
+                  @error('jk')
+                <div class="alert alert-danger">{{ $message }}</div>
+                  @enderror
+                <label class="col-md-4 text-md-right text-left">jenis kelamin</label>
+                <div class="col-lg-6 col-md-6">
+                  <select class="form-control form-control-lg" value="`+ data.jk +`" name="jk">
+                        <option value="laki-laki">Laki-Laki</option>
+                        <option value="perempuan">Perempuan</option>
+                 </select>
+                </div>
+              </div>
+            </div>
+           `);
+            })
+        });
+    });
+
+    $('body').on('click', '.md-update', function () {
+       let id = $('#form-edit').find('#data_id').val();
+       let formData = $('#form-edit').serialize();
+       $.ajax({
+           url: 'update/'+id,
+           method: 'PATCH',
+           data: formData,
+           success: function (data) {
+               $('#myModal').modal('hide');
+               Swal.fire(
+                'Update!',
+                'Data berhasl di update.',
+                'success'
+                );
+                setTimeout(function(){
+                location.reload();
+                },1000);
+           },
+           error: function () {
+                Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+                footer: '<a href>Why do I have this issue?</a>'
+                });
+                setTimeout(function(){
+                location.reload();
+                },1000);
+            }
+       })
+    });
+
+    $(document).on('click', '.md-hapus', function () {
+        let dataId = $(this).data('id');
+        Swal.fire({
+        title: 'Anda Yakin?',
+        text: "Data ini mungkin terhubung ke tabel yang lain!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "delete/" + dataId, //eksekusi ajax ke url ini
+                    type: 'delete',
+                    success: function () {
+                        Swal.fire(
+                        'Terhapus!',
+                        'Data Dihapus Secara Permanen.',
+                        'success'
+                        );
+                        setTimeout(function(){
+                        location.reload();
+                        },1000);
+                    },
+                    error: function () {
+                        Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                        footer: '<a href>Why do I have this issue?</a>'
+                        });
+                        setTimeout(function(){
+                        location.reload();
+                        },1000);
+                    }
+                })
+            }
+        })
     });
 </script>
 @endsection
