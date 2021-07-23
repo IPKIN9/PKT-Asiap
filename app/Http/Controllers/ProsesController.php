@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProsesRequest;
 use App\Model\LokasiModel;
 use App\Model\MobilModel;
 use App\Model\PengirimModel;
@@ -13,6 +14,8 @@ use Illuminate\Support\Str;
 
 class ProsesController extends Controller
 {
+
+
     public function index()
     {
         $data = array(
@@ -25,17 +28,9 @@ class ProsesController extends Controller
         return view('Dashboard.proses')->with('data', $data);
     }
 
-    public function insert(Request $request)
+    public function insert(ProsesRequest $request)
     {
-        $request->validate([
-            'pengirim_id' => 'required',
-            'asal_id' => 'required',
-            'tujuan_id' => 'required',
-            'no_hp' => 'required',
-            'ket' => 'required',
-            'supir_id' => 'required',
-            'mobil_id' => 'required',
-        ]);
+        
         $data = array(
             'no_resi' => Str::random(15),
             'pengirim_id' => $request->input('pengirim_id'),
@@ -60,10 +55,10 @@ class ProsesController extends Controller
         return response()->json($post);
     }
 
-    public function update(Request $request, $id)
+    public function update(ProsesRequest $request, $id)
     {
         $data = array(
-            'pemgirim_id' => $request->input('pengirim_id'),
+            'pengirim_id' => $request->input('pengirim_id'),
             'asal_id' => $request->input('asal_id'),
             'tujuan_id' => $request->input('tujuan_id'),
             'no_hp' => $request->input('no_hp'),

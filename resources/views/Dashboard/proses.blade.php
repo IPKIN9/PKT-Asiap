@@ -9,6 +9,11 @@
                     {{ session('status') }}
                 </div>
                 @endif
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    Data tidak sesuai, Periksa kembali formulir anda !
+                </div>
+                @endif
             </div>
             <div class="card-header">
                 <h4>Data Proses Kirim</h4>
@@ -88,84 +93,110 @@
                                         <form class="wizard-content mt-2">
                                             <div class="wizard-pane">
                                                 <div class="form-group row align-items-center">
-                                                    @error('pengirim_id')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
+
                                                     <label class="col-md-4 text-md-right text-left">Nama
                                                         Pengirim</label>
                                                     <select name="pengirim_id" class="col-lg-6 col-md-6 form-control">
                                                         <option selected disabled>Pilih</option>
                                                         @foreach ($data['pengirim'] as $d)
-                                                        <option value="{{$d->id}}">{{$d->nama}}</option>
+                                                        <option value="{{$d->id}}" @if (old('pengirim_id')==$d->id)
+                                                            selected="selected" @endif>{{$d->nama}}</option>
                                                         @endforeach
                                                     </select>
+                                                    <div class="col-md-4"></div>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        @error('pengirim_id')
+                                                        <span class="text-danger">{{ $message }} !</span>
+                                                        @enderror
+                                                    </div>
                                                 </div>
                                                 <div class="form-group row align-items-center">
-                                                    @error('asal_id')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
                                                     <label class="col-md-4 text-md-right text-left">Asal</label>
                                                     <select name="asal_id" class="col-lg-6 col-md-6 form-control">
                                                         <option selected disabled>Pilih</option>
                                                         @foreach ($data['lokasi'] as $d)
-                                                        <option value="{{$d->id}}">{{$d->cabang}}</option>
+                                                        <option value="{{$d->id}}" @if (old('asal_id')==$d->id)
+                                                            selected=" selected" @endif">{{$d->cabang}}</option>
                                                         @endforeach
                                                     </select>
+                                                    <div class="col-md-4"></div>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        @error('asal_id')
+                                                        <span class="text-danger">{{ $message }} !</span>
+                                                        @enderror
+                                                    </div>
                                                 </div>
                                                 <div class="form-group row align-items-center">
-                                                    @error('tujuan_id')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
                                                     <label class="col-md-4 text-md-right text-left">Tujuan</label>
                                                     <select name="tujuan_id" class="col-lg-6 col-md-6 form-control">
                                                         <option selected disabled>Pilih</option>
                                                         @foreach ($data['lokasi'] as $d)
-                                                        <option value="{{$d->id}}">{{$d->cabang}}</option>
+                                                        <option value="{{$d->id}}" @if (old('tujuan_id')==$d->id)
+                                                            selected="selected" @endif>{{$d->cabang}}</option>
                                                         @endforeach
                                                     </select>
+                                                    <div class="col-md-4"></div>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        @error('tujuan_id')
+                                                        <span class="text-danger">{{ $message }} !</span>
+                                                        @enderror
+                                                    </div>
                                                 </div>
                                                 <div class="form-group row align-items-center">
-                                                    @error('no_hp')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
                                                     <label class="col-md-4 text-md-right text-left">Nomor Hp</label>
                                                     <div class="col-lg-6 col-md-6">
-                                                        <input type="text" name="no_hp" class="form-control">
+                                                        <input type="text" name="no_hp" value="{{old('no_hp')}}"
+                                                            class="form-control">
+                                                        @error('no_hp')
+                                                        <span class="text-danger">{{ $message }} !</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    @error('ket')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
                                                     <label
                                                         class="col-md-4 text-md-right text-left mt-2">Keterangan</label>
                                                     <div class="col-lg-6 col-md-6">
-                                                        <textarea class="form-control" name="ket"></textarea>
+                                                        <textarea class="form-control" id="ket-ms"
+                                                            name="ket"></textarea>
+                                                    </div>
+                                                    <div class="col-md-4"></div>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        @error('ket')
+                                                        <span class="text-danger">{{ $message }} !</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="form-group row align-items-center">
-                                                    @error('supir_id')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
                                                     <label class="col-md-4 text-md-right text-left">Supir</label>
                                                     <select name="supir_id" class="col-lg-6 col-md-6 form-control">
                                                         <option selected disabled>Pilih</option>
                                                         @foreach ($data['supir'] as $d)
-                                                        <option value="{{$d->id}}">{{$d->nama}}</option>
+                                                        <option value="{{$d->id}}" @if (old('supir_id')==$d->id)
+                                                            selected="selected" @endif>{{$d->nama}}</option>
                                                         @endforeach
                                                     </select>
+                                                    <div class="col-md-4"></div>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        @error('supir_id')
+                                                        <span class="text-danger">{{ $message }} !</span>
+                                                        @enderror
+                                                    </div>
                                                 </div>
                                                 <div class="form-group row align-items-center">
-                                                    @error('mobil_id')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
                                                     <label class="col-md-4 text-md-right text-left">Mobil</label>
                                                     <select name="mobil_id" class="col-lg-6 col-md-6 form-control">
                                                         <option selected disabled>Pilih</option>
                                                         @foreach ($data['mobil'] as $d)
-                                                        <option value="{{$d->id}}">{{$d->plat}}</option>
+                                                        <option value="{{$d->id}}" @if (old('mobil_id')==$d->id)
+                                                            selected="selected" @endif>{{$d->plat}}</option>
                                                         @endforeach
                                                     </select>
+                                                    <div class="col-md-4"></div>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        @error('mobil_id')
+                                                        <span class="text-danger">{{ $message }} !</span>
+                                                        @enderror
+                                                    </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <div class="col-md-4"></div>
@@ -198,10 +229,72 @@
                 </button>
             </div>
             <div class="modal-body" id="modal-body">
-                <form id="form-edit">
+                <form id="form_edit">
                     @csrf
-                    <div id="modalContent">
-
+                    <div>
+                        <form class="wizard-content mt-2">
+                            <div class="wizard-pane">
+                                <input type="hidden" name="id" id="data_id">
+                                <div class="form-group row align-items-center">
+                                    <label class="col-md-4 text-md-right text-left">Nama
+                                        Pengirim</label>
+                                    <select name="pengirim_id" id="pengirim_id" class="col-lg-6 col-md-6 form-control">
+                                        <option selected disabled>Pilih</option>
+                                        @foreach ($data['pengirim'] as $d)
+                                        <option value="{{$d->id}}">{{$d->nama}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group row align-items-center">
+                                    <label class="col-md-4 text-md-right text-left">Asal</label>
+                                    <select name="asal_id" id="asal_id" class="col-lg-6 col-md-6 form-control">
+                                        <option selected disabled>Pilih</option>
+                                        @foreach ($data['lokasi'] as $d)
+                                        <option value="{{$d->id}}">{{$d->cabang}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group row align-items-center">
+                                    <label class="col-md-4 text-md-right text-left">Tujuan</label>
+                                    <select name="tujuan_id" id="tujuan_id" class="col-lg-6 col-md-6 form-control">
+                                        <option selected disabled>Pilih</option>
+                                        @foreach ($data['lokasi'] as $d)
+                                        <option value="{{$d->id}}">{{$d->cabang}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group row align-items-center">
+                                    <label class="col-md-4 text-md-right text-left">Nomor Hp</label>
+                                    <div class="col-lg-6 col-md-6">
+                                        <input type="text" name="no_hp" id="no_hp" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group row align-items-center">
+                                    <label class="col-md-4 text-md-right text-left mt-2">Keterangan</label>
+                                    <div class="col-lg-6 col-md-6">
+                                        <textarea class="form-control" name="ket" id="ket"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group row align-items-center">
+                                    <label class="col-md-4 text-md-right text-left">Supir</label>
+                                    <select name="supir_id" id="supir_id" class="col-lg-6 col-md-6 form-control">
+                                        <option selected disabled>Pilih</option>
+                                        @foreach ($data['supir'] as $d)
+                                        <option value="{{$d->id}}">{{$d->nama}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group row align-items-center">
+                                    <label class="col-md-4 text-md-right text-left">Mobil</label>
+                                    <select name="mobil_id" id="mobil_id" class="col-lg-6 col-md-6 form-control">
+                                        <option selected disabled>Pilih</option>
+                                        @foreach ($data['mobil'] as $d)
+                                        <option value="{{$d->id}}">{{$d->plat}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </form>
             </div>
@@ -227,59 +320,27 @@
 </script>
 <script>
     $(document).ready(function () {
-        $('body').on('click', '.md-edit', function () {
+        $('#ket-ms').val('{{old('ket')}}');
+        $('body').on('click', '.md-detail', function () {
             let dataId = $(this).data('id');
             $.get('edit/' + dataId, function (data) {
+                $('#data_id').val(data.id);
                 $('#modal-title').html("Edit Post");
                 $('#myModal').modal('show');
-                $('#modalContent').html('');
-                $('#modalContent').append(`
-            <div class="wizard-pane">
-              <div class="form-group row align-items-center">
-                @error('pengirim_id')
-                <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-                <label class="col-md-4 text-md-right text-left">Nama Pengirim</label>
-                <div class="col-lg-6 col-md-6">
-                  <input type="hidden" id="data_id" value="` + data.id + `" name="id" class="form-control">
-                  <select class="form-control form-control-lg" value="`+ data.pengirim +`" name="pengirim_id">
-                    <option selected disabled>Pilih</option>
-                    @foreach ($data['pengirim'] as $d)
-                    <option value="{{$d->id}}">{{$d->nama}}</option>
-                    @endforeach
-                 </select>
-                </div>
-              </div>
-              <div class="form-group row align-items-center">
-                  @error('hp')
-                <div class="alert alert-danger">{{ $message }}</div>
-                  @enderror
-                <label class="col-md-4 text-md-right text-left">Nomor Hp</label>
-                <div class="col-lg-6 col-md-6">
-                  <input type="text" value="` + data.hp + `" name="hp" class="form-control">
-                </div>
-              </div>
-              <div class="form-group row align-items-center">
-                  @error('jk')
-                <div class="alert alert-danger">{{ $message }}</div>
-                  @enderror
-                <label class="col-md-4 text-md-right text-left">jenis kelamin</label>
-                <div class="col-lg-6 col-md-6">
-                  <select class="form-control form-control-lg" value="`+ data.jk +`" name="jk">
-                        <option value="laki-laki">Laki-Laki</option>
-                        <option value="perempuan">Perempuan</option>
-                 </select>
-                </div>
-              </div>
-            </div>
-           `);
+                $('#pengirim_id').val(data.pengirim_id);
+                $('#asal_id').val(data.asal_id);
+                $('#tujuan_id').val(data.tujuan_id);
+                $('#no_hp').val(data.no_hp);
+                $('#ket').val(data.ket);
+                $('#supir_id').val(data.supir_id);
+                $('#mobil_id').val(data.mobil_id);
             })
         });
     });
 
     $('body').on('click', '.md-update', function () {
-       let id = $('#form-edit').find('#data_id').val();
-       let formData = $('#form-edit').serialize();
+       let id = $('#form_edit').find('#data_id').val();
+       let formData = $('#form_edit').serialize();
        $.ajax({
            url: 'update/'+id,
            method: 'PATCH',
