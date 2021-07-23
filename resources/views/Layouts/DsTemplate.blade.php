@@ -55,41 +55,36 @@
           </li>
         </ul>
       </nav>
-      <div class="main-sidebar">
+      <div class="main-sidebar sidebar-style-2" tabindex="1" style="overflow: hidden; outline: none;">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
-            <a href="index.html">SI-NOTIF</a>
+            <a href="dashboard-ecommerce.html">Si-Notif</a>
           </div>
           <div class="sidebar-brand sidebar-brand-sm">
-            <a href="index.html">St</a>
+            <a href="#">S-N</a>
           </div>
-          <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-            <a href="{{route('pesan.index')}}"
-              class="{{ Route::is('pesan.index') ? 'active' : '' }} btn btn-primary btn-lg btn-block btn-icon-split">
-              <i class="fas fa-rocket"></i> Pesan
-            </a>
-            <a href="{{route('pengirim.index')}}"
-              class="{{ Route::is('pengirim.index') ? 'active' : '' }} btn btn-primary btn-lg btn-block btn-icon-split">
-              <i class="fas fa-rocket"></i> Pengirim
-            </a>
-            <a href="{{route('supir.index')}}"
-              class="{{ Route::is('supir.index') ? 'active' : '' }} btn btn-primary btn-lg btn-block btn-icon-split">
-              <i class="fas fa-rocket"></i> Supir
-            </a>
-            <a href="{{route('lokasi.index')}}"
-              class="{{ Route::is('lokasi.index') ? 'active' : '' }} btn btn-primary btn-lg btn-block btn-icon-split">
-              <i class="fas fa-rocket"></i> Lokasi
-            </a>
-            <a href="{{route('mobil.index')}}"
-              class="{{ Route::is('mobil.index') ? 'active' : '' }} btn btn-primary btn-lg btn-block btn-icon-split">
-              <i class="fas fa-rocket"></i> Mobil
-            </a>
-            <a href="{{route('kirim.index')}}"
-              class="{{ Route::is('kirim.index') ? 'active' : '' }} btn btn-primary btn-lg btn-block btn-icon-split">
-              <i class="fas fa-rocket"></i> Kirim Paket
-            </a>
-          </div>
-        </aside>
+          <ul class="sidebar-menu">
+            <li class="menu-header">Dashboard</li>
+            <li><a class="nav-link" href="{{Route('home')}}"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
+            <li class="menu-header">page 1</li>
+            <li class="dropdown">
+              <a href="#" class="nav-link has-dropdown"><i class="fas fa-car-alt"></i> <span>Kendaraan</span></a>
+              <ul class="dropdown-menu" style="display: none;">
+                <li><a class="nav-link" href="{{Route('supir.index')}}">Supir</a></li>
+                <li><a class="nav-link" href="{{Route('mobil.index')}}">Mobil</a></li>
+              </ul>
+            </li>
+            <li class="menu-header">Page 2</li>
+            <li class="dropdown">
+              <a href="#" class="nav-link has-dropdown"><i class="fas fa-dolly-flatbed"></i> <span>Pengiriman</span></a>
+              <ul class="dropdown-menu" style="display: none;">
+                <li><a class="nav-link" href="{{Route('lokasi.index')}}">Lokasi</a></li>
+                <li><a class="nav-link" href="{{Route('pengirim.index')}}">Pengirim</a></li>
+                <li><a class="nav-link" href="{{Route('pesan.index')}}">Pesan</a></li>
+              </ul>
+            </li>
+            <li><a class="nav-link" href="{{Route('kirim.index')}}"><i class="fas fa-shipping-fast"></i> <span>Kirim
+                  Pesan</span></a></li>
       </div>
 
       <!-- Main Content -->
@@ -97,11 +92,6 @@
         <section class="section">
           <div class="section-header">
             <h1>SI-NOTIF</h1>
-            <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-              <div class="breadcrumb-item"><a href="#">Layout</a></div>
-              <div class="breadcrumb-item">Default Layout</div>
-            </div>
           </div>
 
           <div class="section-body">
@@ -110,12 +100,9 @@
         </section>
       </div>
       <footer class="main-footer">
-        <div class="footer-left">
-          Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad Nauval
-            Azhar</a>
-        </div>
+
         <div class="footer-right">
-          2.3.0
+
         </div>
       </footer>
     </div>
