@@ -17,11 +17,11 @@
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active show" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                            aria-controls="home" aria-selected="true">Home</a>
+                            aria-controls="home" aria-selected="true">Tabel</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                            aria-controls="profile" aria-selected="false">Profile</a>
+                            aria-controls="profile" aria-selected="false">Tambah Data</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
@@ -32,7 +32,7 @@
                                     <th style="width: 500px;">Pesan</th>
                                     <th>Type</th>
                                     <th>Created at</th>
-                                    <th>Deleted at</th>
+                                    <th>Updated at</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -61,7 +61,7 @@
                                     <th>pesan</th>
                                     <th>type</th>
                                     <th>Created at</th>
-                                    <th>Deleted at</th>
+                                    <th>Updated at</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
@@ -130,7 +130,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 id="modal-title" class="modal-title">Modal title</h5>
+                <h5 id="modal-title" class="modal-title">Edit Pesan</h5>
                 <span aria-hidden="true">×</span>
                 </button>
             </div>
@@ -169,7 +169,7 @@
         $('body').on('click', '.md-edit', function () {
             let dataId = $(this).data('id');
             $.get('edit/' + dataId, function (data) {
-                $('#modal-title').html("Edit Post");
+                $('#modal-title').html("Edit Data Pesan");
                 $('#myModal').modal('show');
                 $('#modalContent').html('');
                 $('#modalContent').append(`

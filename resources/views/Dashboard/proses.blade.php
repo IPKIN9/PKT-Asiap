@@ -41,7 +41,7 @@
                                     <th>Alamat</th>
                                     <th>Status</th>
                                     <th>Created at</th>
-                                    <th>Deleted at</th>
+                                    <th>Updated at</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -78,7 +78,7 @@
                                     <th>Alamat</th>
                                     <th>Status</th>
                                     <th>Created at</th>
-                                    <th>Deleted at</th>
+                                    <th>Updated at</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
@@ -410,7 +410,7 @@
             let dataId = $(this).data('id');
             $.get('edit/' + dataId, function (data) {
                 $('#data_id').val(data.id);
-                $('#modal-title').html("Edit Post");
+                $('#modal-title').html("Edit Data Paket");
                 $('#myModal').modal('show');
                 $('#pengirim_id').val(data.pengirim_id);
                 $('#asal_id').val(data.asal_id);

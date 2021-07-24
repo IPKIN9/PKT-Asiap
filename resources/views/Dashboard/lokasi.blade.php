@@ -21,7 +21,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                            aria-controls="profile" aria-selected="false">Data Baru</a>
+                            aria-controls="profile" aria-selected="false">Tambah Data</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
@@ -32,7 +32,7 @@
                                     <th>Cabang</th>
                                     <th>Alamat</th>
                                     <th>Created at</th>
-                                    <th>Updated_at at</th>
+                                    <th>Updated at</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -122,7 +122,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 id="modal-title" class="modal-title">Modal title</h5>
+                <h5 id="modal-title" class="modal-title">Edit Data Lokasi</h5>
                 <span aria-hidden="true">×</span>
                 </button>
             </div>
@@ -159,7 +159,7 @@
         $('body').on('click', '.md-edit', function () {
             let dataId = $(this).data('id');
             $.get('edit/' + dataId, function (data) {
-                $('#modal-title').html("Edit Post");
+                $('#modal-title').html("Edit Data Lokasi");
                 $('#myModal').modal('show');
                 $('#modalContent').html('');
                 $('#modalContent').append(`
