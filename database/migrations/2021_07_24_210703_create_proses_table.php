@@ -6,6 +6,11 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateProsesTable extends Migration
 {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
     public function up()
     {
         Schema::create('proses', function (Blueprint $table) {
@@ -28,13 +33,21 @@ class CreateProsesTable extends Migration
             $table->foreignId('mobil_id')
                 ->constrained('mobil')
                 ->onDelete('cascade');
-                $table->string('penerima');
-                $table->string('hp');
-                $table->string('alamat');
+            $table->string('penerima');
+            $table->string('hp');
+            $table->string('alamat');
+            $table->foreignId('status_id')
+                ->constrained('status_pengiriman')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
 
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
     public function down()
     {
         Schema::dropIfExists('proses');

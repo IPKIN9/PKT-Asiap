@@ -39,6 +39,7 @@
                                     <th>Tujuan</th>
                                     <th>Penerima</th>
                                     <th>Alamat</th>
+                                    <th>Status</th>
                                     <th>Created at</th>
                                     <th>Deleted at</th>
                                     <th>Action</th>
@@ -52,6 +53,7 @@
                                     <th>{{$d->tujuan_rol->cabang}}</th>
                                     <th>{{$d->penerima}}</th>
                                     <th>{{$d->alamat}}</th>
+                                    <th>{{$d->status_rol->status_pengiriman}}</th>
                                     <th>{{date('d-m-Y', strtotime($d->created_at))}}</th>
                                     <th>{{date('d-m-Y', strtotime($d->updated_at))}}</th>
                                     <th>
@@ -74,6 +76,7 @@
                                     <th>Tujuan</th>
                                     <th>Penerima</th>
                                     <th>Alamat</th>
+                                    <th>Status</th>
                                     <th>Created at</th>
                                     <th>Deleted at</th>
                                     <th>Action</th>
@@ -230,6 +233,24 @@
                                                         @enderror
                                                     </div>
                                                 </div>
+                                                <div class="form-group row align-items-center">
+                                                    <label class="col-md-4 text-md-right text-left">Status
+                                                        Pengiriman</label>
+                                                    <select name="status_id" class="col-lg-6 col-md-6 form-control">
+                                                        <option selected disabled>Pilih</option>
+                                                        @foreach ($data['status'] as $d)
+                                                        <option value="{{$d->id}}" @if (old('status_id')==$d->id)
+                                                            selected="selected" @endif>{{$d->status_pengiriman}}
+                                                        </option>
+                                                        @endforeach
+                                                    </select>
+                                                    <div class="col-md-4"></div>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        @error('status_id')
+                                                        <span class="text-danger">{{ $message }} !</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
                                                 <div class="form-group row">
                                                     <div class="col-md-4"></div>
                                                     <div class="col-lg-6 col-md-6 text-right">
@@ -343,6 +364,18 @@
                                         <input type="text" name="alamat" id="alamat" class="form-control">
                                     </div>
                                 </div>
+                                <div class="form-group row align-items-center">
+                                    <label class="col-md-4 text-md-right text-left">Status
+                                        Pengiriman</label>
+                                    <select name="status_id" id="status" class="col-lg-6 col-md-6 form-control">
+                                        <option selected disabled>Pilih</option>
+                                        @foreach ($data['status'] as $d)
+                                        <option value="{{$d->id}}" @if (old('status_id')==$d->id)
+                                            selected="selected" @endif>{{$d->status_pengiriman}}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -389,6 +422,7 @@
                 $('#penerima').val(data.penerima);
                 $('#hp').val(data.hp);
                 $('#alamat').val(data.alamat);
+                $('#status').val(data.status_id);
             })
         });
     });

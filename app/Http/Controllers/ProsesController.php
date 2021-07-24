@@ -7,6 +7,7 @@ use App\Model\LokasiModel;
 use App\Model\MobilModel;
 use App\Model\PengirimModel;
 use App\Model\ProsesModel;
+use App\Model\StatusPengirimanModel;
 use App\Model\SupirModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -23,14 +24,22 @@ class ProsesController extends Controller
             'supir' => SupirModel::get(),
             'mobil' => MobilModel::get(),
             'lokasi' => LokasiModel::get(),
-            'proses' => ProsesModel::with('pengirim_rol', 'asal_rol', 'tujuan_rol', 'supir_rol', 'mobil_rol')->get(),
+            'status' => StatusPengirimanModel::get(),
+            'proses' => ProsesModel::with(
+                'pengirim_rol',
+                'asal_rol',
+                'tujuan_rol',
+                'supir_rol',
+                'mobil_rol',
+                'status_rol'
+            )->get(),
         );
         return view('Dashboard.proses')->with('data', $data);
     }
 
     public function insert(ProsesRequest $request)
     {
-        
+
         $data = array(
             'no_resi' => Str::random(15),
             'pengirim_id' => $request->input('pengirim_id'),
@@ -43,6 +52,7 @@ class ProsesController extends Controller
             'penerima' => $request->input('penerima'),
             'hp' => $request->input('hp'),
             'alamat' => $request->input('alamat'),
+            'status_id' => $request->input('status_id'),
             'created_at' => now(),
             'updated_at' => now(),
         );
@@ -71,6 +81,7 @@ class ProsesController extends Controller
             'penerima' => $request->input('penerima'),
             'hp' => $request->input('hp'),
             'alamat' => $request->input('alamat'),
+            'status_id' => $request->input('status_id'),
             'updated_at' => now()
         );
         ProsesModel::where('id', $id)->update($data);

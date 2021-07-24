@@ -9,7 +9,8 @@ class ProsesModel extends Model
     protected $table = 'proses';
     protected $fillable = [
         'id', 'no_resi', 'pengirim_id', 'asal_id', 'tujuan_id',
-        'no_hp', 'ket', 'supir_id', 'mobil_id', 'penerima', 'hp', 'alamat', 'created_at', 'updated_at'
+        'no_hp', 'ket', 'supir_id', 'mobil_id', 'penerima', 'hp',
+        'alamat', 'status_id', 'created_at', 'updated_at'
     ];
     public function pengirim_rol()
     {
@@ -30,5 +31,9 @@ class ProsesModel extends Model
     public function mobil_rol()
     {
         return $this->belongsTo(MobilModel::class, 'mobil_id');
+    }
+    public function status_rol()
+    {
+        return $this->belongsTo(StatusPengirimanModel::class, 'status_id');
     }
 }
