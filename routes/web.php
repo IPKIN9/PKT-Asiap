@@ -70,4 +70,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::patch('update/{id}', 'ProsesController@update')->name('kirim.update');
         Route::delete('delete/{id}', 'ProsesController@destroy')->name('kirim.destroy');
     });
+    Route::prefix('status/')->group(function () {
+        Route::get('show/', 'StatusPengirimanController@index')->name('status.index');
+        Route::post('inserting/', 'StatusPengirimanController@insert')->name('status.insert');
+        Route::get('edit/{id}', 'StatusPengirimanController@edit_data')->name('status.edit');
+        Route::patch('update/{id}', 'StatusPengirimanController@update')->name('status.update');
+        Route::delete('delete/{id}', 'StatusPengirimanController@destroy')->name('status.destroy');
+    });
 });
