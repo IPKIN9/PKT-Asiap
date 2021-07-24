@@ -40,13 +40,6 @@
               <div class="d-sm-none d-lg-inline-block">{{ Auth::user()->name }}</div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-              <div class="dropdown-title">Logged in 5 min ago</div>
-              <a href="features-profile.html" class="dropdown-item has-icon">
-                <i class="far fa-user"></i> Profile
-              </a>
-              <a href="features-settings.html" class="dropdown-item has-icon">
-                <i class="fas fa-cog"></i> Settings
-              </a>
               <div class="dropdown-divider"></div>
               <a href="{{ Route('logout') }}" class="dropdown-item has-icon text-danger">
                 <i class="fas fa-sign-out-alt"></i> Logout
@@ -65,7 +58,8 @@
           </div>
           <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
-            <li><a class=""{{ Route::is('home.index') ? 'active' : '' }} " href="{{Route('home')}}"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
+            <li><a class="" {{ Route::is('home.index') ? 'active' : '' }} " href=" {{Route('home')}}"><i
+                  class="fas fa-fire"></i> <span>Dashboard</span></a></li>
             <li class="menu-header">page 1</li>
             <li class="dropdown">
               <a href="#" class="nav-link has-dropdown"><i class="fas fa-car-alt"></i> <span>Kendaraan</span></a>
