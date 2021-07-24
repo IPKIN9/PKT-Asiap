@@ -1,7 +1,7 @@
 @extends('layouts.DsTemplate')
 @section('content')
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-12">
         <div class="card">
             <div class="small">
                 @if (session('status'))
@@ -11,7 +11,7 @@
                 @endif
             </div>
             <div class="card-header">
-                <h4>Data Pesan</h4>
+                <h4>Data Status Pengiriman</h4>
             </div>
             <div class="card-body">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -29,8 +29,8 @@
                         <table id="myTable" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th style="width: 500px;">Pesan</th>
-                                    <th>Type</th>
+                                    <th>Status Pengiriman</th>
+                                    <th>Keterangan</th>
                                     <th>Created at</th>
                                     <th>Deleted at</th>
                                     <th>Action</th>
@@ -39,8 +39,8 @@
                             <tbody>
                                 @foreach($data as $d)
                                 <tr>
-                                    <th>{{$d->pesan}}</th>
-                                    <th>{{$d->type}}</th>
+                                    <th>{{$d->status_pengiriman}}</th>
+                                    <th>{{$d->ket}}</th>
                                     <th>{{date('d-m-Y', strtotime($d->created_at))}}</th>
                                     <th>{{date('d-m-Y', strtotime($d->updated_at))}}</th>
                                     <th>
@@ -58,8 +58,8 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>pesan</th>
-                                    <th>type</th>
+                                    <th>Status Pengiriman</th>
+                                    <th>Keterangan</th>
                                     <th>Created at</th>
                                     <th>Deleted at</th>
                                     <th>Action</th>
@@ -69,37 +69,35 @@
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="col-12">
-                            <form action="{{route('pesan.insert')}}" method="POST">
+                            <form action="{{route('status.insert')}}" method="POST">
                                 @csrf
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4>Buat pesan baru</h4>
+                                        <h4>Buat data baru</h4>
                                     </div>
                                     <div class="card-body">
                                         <form class="wizard-content mt-2">
                                             <div class="wizard-pane">
                                                 <div class="form-group row align-items-center">
-                                                    @error('type')
+                                                    @error('status_pengiriman')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
-                                                    <label class="col-md-4 text-md-right text-left">Type</label>
+                                                    <label class="col-md-4 text-md-right text-left">Status
+                                                        Pengiriman</label>
                                                     <div class="col-lg-6 col-md-6">
-                                                        <select class="form-control selectric" name="type">
-                                                            <option selected hidden>Pilih</option>
-                                                            <option value="tiba">Tiba</option>
-                                                            <option value="berangkat">Berangkat</option>
-                                                        </select>
+                                                        <input type="text" name="status_pengiriman"
+                                                            class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-md-4 text-md-right text-left mt-2">Pesan</label>
+                                                    <label
+                                                        class="col-md-4 text-md-right text-left mt-2">Keterangan</label>
                                                     <div class="col-lg-6 col-md-6">
-                                                        <textarea class="form-control" id="pesan"
-                                                            name="pesan"></textarea>
+                                                        <textarea class="form-control" id="ket" name="ket"></textarea>
                                                     </div>
                                                     <div class="col-md-4"></div>
                                                     <div class="col-lg-6 col-md-6">
-                                                        @error('pesan')
+                                                        @error('ket')
                                                         <span class="text-danger">{{ $message }} !</span>
                                                         @enderror
                                                     </div>
@@ -159,9 +157,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        $('#myTable').DataTable({
-            responsive:true
-        });
+        $('#myTable').DataTable();
     });
 </script>
 <script>
@@ -175,34 +171,26 @@
                 $('#modalContent').append(`
             <div class="wizard-pane">
               <div class="form-group row align-items-center">
-                @error('type')
+                @error('status_pengiriman')
                 <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
-                <label class="col-md-4 text-md-right text-left">Type</label>
+                <label class="col-md-4 text-md-right text-left">Status Pengiriman</label>
                 <div class="col-lg-6 col-md-6">
                   <input type="hidden" id="data_id" value="` + data.id + `" name="id" class="form-control">
-                  <select class="form-control selectric" value="` + data.type + `" name="type">
-                        <option selected hidden>Pilih</option>
-                        <option value="tiba">Tiba</option>
-                        <option value="berangkat">Berangkat</option>
-                    </select>
+                  <input type="text" value="` + data.status_pengiriman + `" name="status_pengiriman" class="form-control">
                 </div>
               </div>
-              <div class="form-group row">
-                    <label class="col-md-4 text-md-right text-left mt-2">Pesan</label>
-                    <div class="col-lg-6 col-md-6">
-                        <textarea class="form-control" id="pesanid" name="pesan"></textarea>
-                    </div>
-                    <div class="col-md-4"></div>
-                    <div class="col-lg-6 col-md-6">
-                        @error('pesan')
-                        <span class="text-danger">{{ $message }} !</span>
-                        @enderror
-                    </div>
+              <div class="form-group row align-items-center">
+                  @error('ket')
+                <div class="alert alert-danger">{{ $message }}</div>
+                  @enderror
+                <label class="col-md-4 text-md-right text-left">Keterangan</label>
+                <div class="col-lg-6 col-md-6">
+                  <input type="text" value="` + data.ket + `" name="ket" class="form-control">
                 </div>
+              </div>
             </div>
            `);
-           $('#pesanid').val(data.pesan);
             })
         });
     });

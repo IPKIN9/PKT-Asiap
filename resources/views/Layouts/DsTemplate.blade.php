@@ -81,6 +81,7 @@
                 <li><a class="nav-link" href="{{Route('lokasi.index')}}">Lokasi</a></li>
                 <li><a class="nav-link" href="{{Route('pengirim.index')}}">Pengirim</a></li>
                 <li><a class="nav-link" href="{{Route('pesan.index')}}">Pesan</a></li>
+                <li><a class="nav-link" href="{{Route('status.index')}}">Status Pengiriman</a></li>
               </ul>
             </li>
             <li><a class="nav-link" href="{{Route('kirim.index')}}"><i class="fas fa-shipping-fast"></i> <span>Kirim
