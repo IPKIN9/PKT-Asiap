@@ -37,8 +37,8 @@
                                     <th>No. Resi</th>
                                     <th>Pengirim</th>
                                     <th>Tujuan</th>
-                                    <th>Hp</th>
-                                    <th>Keterangan</th>
+                                    <th>Penerima</th>
+                                    <th>Alamat</th>
                                     <th>Created at</th>
                                     <th>Deleted at</th>
                                     <th>Action</th>
@@ -50,8 +50,8 @@
                                     <th>{{$d->no_resi}}</th>
                                     <th>{{$d->pengirim_rol->nama}}</th>
                                     <th>{{$d->tujuan_rol->cabang}}</th>
-                                    <th>{{$d->no_hp}}</th>
-                                    <th>{{$d->ket}}</th>
+                                    <th>{{$d->penerima}}</th>
+                                    <th>{{$d->alamat}}</th>
                                     <th>{{date('d-m-Y', strtotime($d->created_at))}}</th>
                                     <th>{{date('d-m-Y', strtotime($d->updated_at))}}</th>
                                     <th>
@@ -72,8 +72,8 @@
                                     <th>No. Resi</th>
                                     <th>Pengirim</th>
                                     <th>Tujuan</th>
-                                    <th>Hp</th>
-                                    <th>Keterangan</th>
+                                    <th>Penerima</th>
+                                    <th>Alamat</th>
                                     <th>Created at</th>
                                     <th>Deleted at</th>
                                     <th>Action</th>
@@ -162,6 +162,38 @@
                                                     <div class="col-md-4"></div>
                                                     <div class="col-lg-6 col-md-6">
                                                         @error('ket')
+                                                        <span class="text-danger">{{ $message }} !</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row align-items-center">
+                                                    <label class="col-md-4 text-md-right text-left">Nama
+                                                        Penerima</label>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <input type="text" name="penerima" value="{{old('penerima')}}"
+                                                            class="form-control">
+                                                        @error('penerima')
+                                                        <span class="text-danger">{{ $message }} !</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row align-items-center">
+                                                    <label class="col-md-4 text-md-right text-left">Nomor Hp</label>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <input type="text" name="hp" value="{{old('hp')}}"
+                                                            class="form-control">
+                                                        @error('hp')
+                                                        <span class="text-danger">{{ $message }} !</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row align-items-center">
+                                                    <label class="col-md-4 text-md-right text-left">Alamat
+                                                        Lengkap</label>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <input type="text" name="alamat" value="{{old('alamat')}}"
+                                                            class="form-control">
+                                                        @error('alamat')
                                                         <span class="text-danger">{{ $message }} !</span>
                                                         @enderror
                                                     </div>
@@ -293,6 +325,24 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <div class="form-group row align-items-center">
+                                    <label class="col-md-4 text-md-right text-left">Penerima</label>
+                                    <div class="col-lg-6 col-md-6">
+                                        <input type="text" name="penerima" id="penerima" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group row align-items-center">
+                                    <label class="col-md-4 text-md-right text-left">Nomor Hp </label>
+                                    <div class="col-lg-6 col-md-6">
+                                        <input type="text" name="hp" id="hp" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group row align-items-center">
+                                    <label class="col-md-4 text-md-right text-left">Alamat Lengkap</label>
+                                    <div class="col-lg-6 col-md-6">
+                                        <input type="text" name="alamat" id="alamat" class="form-control">
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -315,7 +365,9 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        $('#myTable').DataTable();
+        $('#myTable').DataTable({
+            responsive:true
+        });
     });
 </script>
 <script>
@@ -334,6 +386,9 @@
                 $('#ket').val(data.ket);
                 $('#supir_id').val(data.supir_id);
                 $('#mobil_id').val(data.mobil_id);
+                $('#penerima').val(data.penerima);
+                $('#hp').val(data.hp);
+                $('#alamat').val(data.alamat);
             })
         });
     });

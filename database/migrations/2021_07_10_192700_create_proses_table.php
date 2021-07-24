@@ -28,6 +28,9 @@ class CreateProsesTable extends Migration
             $table->foreignId('mobil_id')
                 ->constrained('mobil')
                 ->onDelete('cascade');
+                $table->string('penerima');
+                $table->string('hp');
+                $table->string('alamat');
             $table->timestamps();
         });
     }

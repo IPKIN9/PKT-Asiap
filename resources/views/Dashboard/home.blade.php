@@ -34,9 +34,11 @@
                 <td><a href="#">{{$d->no_resi}}</a></td>
                 <td class="font-weight-600">{{$d->pengirim_rol->nama}}</td>
                 <td>
-                  <div class="badge badge-warning">{{$d->asal_rol->cabang}}</div>
+                  <div class="badge badge-success">{{$d->asal_rol->cabang}}</div>
                 </td>
-                <td>{{$d->tujuan_rol->cabang}}</td>
+                <td>
+                  <div class="badge badge-warning">{{$d->tujuan_rol->cabang}}</div>
+                </td>
               </tr>
               @endforeach
             </tbody>

@@ -40,6 +40,9 @@ class ProsesController extends Controller
             'ket' => $request->input('ket'),
             'supir_id' => $request->input('supir_id'),
             'mobil_id' => $request->input('mobil_id'),
+            'penerima' => $request->input('penerima'),
+            'hp' => $request->input('hp'),
+            'alamat' => $request->input('alamat'),
             'created_at' => now(),
             'updated_at' => now(),
         );
@@ -65,6 +68,9 @@ class ProsesController extends Controller
             'ket' => $request->input('ket'),
             'supir_id' => $request->input('supir_id'),
             'mobil_id' => $request->input('mobil_id'),
+            'penerima' => $request->input('penerima'),
+            'hp' => $request->input('hp'),
+            'alamat' => $request->input('alamat'),
             'updated_at' => now()
         );
         ProsesModel::where('id', $id)->update($data);

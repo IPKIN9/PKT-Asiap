@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>Layout &rsaquo; Default &mdash; Stisla</title>
+  <title>Si-Notif</title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -65,7 +65,7 @@
           </div>
           <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
-            <li><a class="nav-link" href="{{Route('home')}}"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
+            <li><a class=""{{ Route::is('home.index') ? 'active' : '' }} " href="{{Route('home')}}"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
             <li class="menu-header">page 1</li>
             <li class="dropdown">
               <a href="#" class="nav-link has-dropdown"><i class="fas fa-car-alt"></i> <span>Kendaraan</span></a>
@@ -84,7 +84,7 @@
               </ul>
             </li>
             <li><a class="nav-link" href="{{Route('kirim.index')}}"><i class="fas fa-shipping-fast"></i> <span>Kirim
-                  Pesan</span></a></li>
+                  Paket</span></a></li>
       </div>
 
       <!-- Main Content -->
