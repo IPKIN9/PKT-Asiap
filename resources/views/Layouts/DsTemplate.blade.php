@@ -57,9 +57,10 @@
             <a href="#">S-N</a>
           </div>
           <ul class="sidebar-menu">
+            @if (Auth::user()->role == 'superadmin')
             <li class="menu-header">Dashboard</li>
-            <li><a class="" {{ Route::is('home.index') ? 'active' : '' }} " href=" {{Route('home')}}"><i
-                  class="fas fa-fire"></i> <span>Dashboard</span></a></li>
+            <li><a class=" {{ Route::is('home.index') ? 'active' : '' }} " href=" {{Route('home')}}">
+                <i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
             <li class="menu-header">page 1</li>
             <li class="dropdown">
               <a href="#" class="nav-link has-dropdown"><i class="fas fa-car-alt"></i> <span>Kendaraan</span></a>
@@ -68,6 +69,7 @@
                 <li><a class="nav-link" href="{{Route('mobil.index')}}">Mobil</a></li>
               </ul>
             </li>
+
             <li class="menu-header">Page 2</li>
             <li class="dropdown">
               <a href="#" class="nav-link has-dropdown"><i class="fas fa-dolly-flatbed"></i> <span>Pengiriman</span></a>
@@ -80,6 +82,35 @@
             </li>
             <li><a class="nav-link" href="{{Route('kirim.index')}}"><i class="fas fa-shipping-fast"></i> <span>Kirim
                   Paket</span></a></li>
+          </ul>
+          @endif
+
+          @if (Auth::user()->role == 'admin')
+          <li class="menu-header">Dashboard</li>
+          <li><a class=" {{ Route::is('home.index') ? 'active' : '' }} " href=" {{Route('home')}}">
+              <i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
+          <li class="menu-header">page 1</li>
+          <li class="dropdown">
+            <a href="#" class="nav-link has-dropdown"><i class="fas fa-car-alt"></i> <span>Kendaraan</span></a>
+            <ul class="dropdown-menu" style="display: none;">
+              <li><a class="nav-link" href="{{Route('supir.index')}}">Supir</a></li>
+              <li><a class="nav-link" href="{{Route('mobil.index')}}">Mobil</a></li>
+            </ul>
+          </li>
+
+          <li class="menu-header">Page 2</li>
+          <li class="dropdown">
+            <a href="#" class="nav-link has-dropdown"><i class="fas fa-dolly-flatbed"></i> <span>Pengiriman</span></a>
+            <ul class="dropdown-menu" style="display: none;">
+              <li><a class="nav-link" href="{{Route('pengirim.index')}}">Pengirim</a></li>
+              <li><a class="nav-link" href="{{Route('status.index')}}">Status Pengiriman</a></li>
+            </ul>
+          </li>
+          <li><a class="nav-link" href="{{Route('kirim.index')}}"><i class="fas fa-shipping-fast"></i> <span>Kirim
+                Paket</span></a></li>
+          </ul>
+          @endif
+
       </div>
 
       <!-- Main Content -->

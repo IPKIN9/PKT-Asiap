@@ -83,20 +83,32 @@
                                             <input id="password_confirm" type="password" class="form-control"
                                                 name="password_confirmation">
                                         </div>
-                                    </div>
 
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary btn-lg btn-block">
-                                            Register
-                                        </button>
+                                        <div class="form-group col-6">
+                                            <label for="role">Role</label>
+                                            <select class="form-control form-control-lg" name="role">
+                                                <option value="admin">Admin</option>
+                                                <option value="superadmin">Super Admin</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </form>
                             </div>
+
+
+
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">
+                                    Register
+                                </button>
+                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+    </div>
+    </section>
     </div>
 
     <!-- General JS Scripts -->

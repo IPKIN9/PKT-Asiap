@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use App\Model\User;
-
+use phpDocumentor\Reflection\Types\Boolean;
 
 class AuthController extends Controller
 {
@@ -66,7 +66,8 @@ class AuthController extends Controller
         $rules = [
             'name'                  => 'required|min:3|max:35',
             'username'              => 'required|unique:users',
-            'password'              => 'required|confirmed'
+            'password'              => 'required|confirmed',
+            'role'                  => 'required'
         ];
 
         $messages = [
@@ -76,7 +77,8 @@ class AuthController extends Controller
             'username.required'     => 'Username wajib diisi',
             'username.unique'       => 'Username sudah terdaftar',
             'password.required'     => 'Password wajib diisi',
-            'password.confirmed'    => 'Password tidak sama dengan konfirmasi password'
+            'password.confirmed'    => 'Password tidak sama dengan konfirmasi password',
+            'role.required'         => 'Role Wajib Dipilih'
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -89,6 +91,7 @@ class AuthController extends Controller
         $user->name = ucwords(strtolower($request->name));
         $user->username = strtolower($request->username);
         $user->password = Hash::make($request->password);
+        $user->role = strtolower($request->role);
         $simpan = $user->save();
 
         if ($simpan) {
