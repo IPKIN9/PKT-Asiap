@@ -4,7 +4,7 @@
   <div class="col-12 mb-4">
     <div class="hero bg-primary text-white">
       <div class="hero-inner">
-        <h2>Welcome Back, {{ Auth::user()->name }}!</h2>
+        <h2>Welcome Back, <span class="text-uppercase">{{ Auth::user()->role }}!</span></h2>
       </div>
     </div>
   </div>
