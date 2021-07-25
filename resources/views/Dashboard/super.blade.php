@@ -1,7 +1,7 @@
 @extends('layouts.DsTemplate')
 @section('content')
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-12">
         <div class="card">
             <div class="small">
                 @if (session('status'))
@@ -11,7 +11,7 @@
                 @endif
             </div>
             <div class="card-header">
-                <h4>Data Pesan</h4>
+                <h4>Data Super Admin</h4>
             </div>
             <div class="card-body">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -29,8 +29,9 @@
                         <table id="myTable" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th style="width: 500px;">Pesan</th>
-                                    <th>Type</th>
+                                    <th>Name</th>
+                                    <th>Username</th>
+                                    <th>Role</th>
                                     <th>Created at</th>
                                     <th>Updated at</th>
                                     <th>Action</th>
@@ -39,8 +40,9 @@
                             <tbody>
                                 @foreach($data as $d)
                                 <tr>
-                                    <th>{{$d->pesan}}</th>
-                                    <th>{{$d->type}}</th>
+                                    <th>{{$d->name}}</th>
+                                    <th>{{$d->username}}</th>
+                                    <th>{{$d->role}}</th>
                                     <th>{{date('d-m-Y', strtotime($d->created_at))}}</th>
                                     <th>{{date('d-m-Y', strtotime($d->updated_at))}}</th>
                                     <th>
@@ -58,8 +60,9 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>pesan</th>
-                                    <th>type</th>
+                                    <th>Name</th>
+                                    <th>Username</th>
+                                    <th>Role</th>
                                     <th>Created at</th>
                                     <th>Updated at</th>
                                     <th>Action</th>
@@ -69,39 +72,53 @@
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="col-12">
-                            <form action="{{route('pesan.insert')}}" method="POST">
+                            <form action="{{route('super.insert')}}" method="POST">
                                 @csrf
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4>Buat pesan baru</h4>
+                                        <h4>Buat data baru</h4>
                                     </div>
                                     <div class="card-body">
                                         <form class="wizard-content mt-2">
                                             <div class="wizard-pane">
                                                 <div class="form-group row align-items-center">
-                                                    @error('type')
+                                                    @error('name')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
-                                                    <label class="col-md-4 text-md-right text-left">Type</label>
+                                                    <label class="col-md-4 text-md-right text-left">name</label>
                                                     <div class="col-lg-6 col-md-6">
-                                                        <select class="form-control selectric" name="type">
-                                                            <option selected hidden>Pilih</option>
-                                                            <option value="tiba">Tiba</option>
-                                                            <option value="berangkat">Berangkat</option>
-                                                        </select>
+                                                        <input type="text" name="name" class="form-control">
                                                     </div>
                                                 </div>
-                                                <div class="form-group row">
-                                                    <label class="col-md-4 text-md-right text-left mt-2">Pesan</label>
+                                                <div class="form-group row align-items-center">
+                                                    @error('username')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
+                                                    <label class="col-md-4 text-md-right text-left">Username</label>
                                                     <div class="col-lg-6 col-md-6">
-                                                        <textarea class="form-control" id="pesan"
-                                                            name="pesan"></textarea>
+                                                        <input type="text" name="username" class="form-control">
                                                     </div>
-                                                    <div class="col-md-4"></div>
+                                                </div>
+                                                <div class="form-group row align-items-center">
+                                                    @error('password')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
+                                                    <label class="col-md-4 text-md-right text-left">Password</label>
                                                     <div class="col-lg-6 col-md-6">
-                                                        @error('pesan')
-                                                        <span class="text-danger">{{ $message }} !</span>
-                                                        @enderror
+                                                        <input type="password" name="password" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row align-items-center">
+                                                    @error('role')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
+                                                    <label class="col-md-4 text-md-right text-left">Role</label>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <select class="form-control selectric" name="role">
+                                                            <option selected hidden>Pilih</option>
+                                                            <option value="admin">Admin</option>
+                                                            <option value="super admin">Super Admin</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -130,7 +147,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 id="modal-title" class="modal-title">Edit Pesan</h5>
+                <h5 id="modal-title" class="modal-title">Edit Data Super Admin</h5>
                 <span aria-hidden="true">×</span>
                 </button>
             </div>
@@ -159,9 +176,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        $('#myTable').DataTable({
-            responsive:true
-        });
+        $('#myTable').DataTable();
     });
 </script>
 <script>
@@ -169,40 +184,54 @@
         $('body').on('click', '.md-edit', function () {
             let dataId = $(this).data('id');
             $.get('edit/' + dataId, function (data) {
-                $('#modal-title').html("Edit Data Pesan");
+                $('#modal-title').html("Edit Data Super Admin");
                 $('#myModal').modal('show');
                 $('#modalContent').html('');
                 $('#modalContent').append(`
             <div class="wizard-pane">
               <div class="form-group row align-items-center">
-                @error('type')
+                @error('name')
                 <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
-                <label class="col-md-4 text-md-right text-left">Type</label>
+                <label class="col-md-4 text-md-right text-left">Username</label>
                 <div class="col-lg-6 col-md-6">
                   <input type="hidden" id="data_id" value="` + data.id + `" name="id" class="form-control">
-                  <select class="form-control selectric" value="` + data.type + `" name="type">
-                        <optiozn selected hidden>Pilih</optiozn>
-                        <option value="tiba">Tiba</option>
-                        <option value="berangkat">Berangkat</option>
-                    </select>
+                  <input type="text" value="` + data.name + `" name="name" class="form-control">
                 </div>
               </div>
-              <div class="form-group row">
-                    <label class="col-md-4 text-md-right text-left mt-2">Pesan</label>
-                    <div class="col-lg-6 col-md-6">
-                        <textarea class="form-control" id="pesanid" name="pesan"></textarea>
-                    </div>
-                    <div class="col-md-4"></div>
-                    <div class="col-lg-6 col-md-6">
-                        @error('pesan')
-                        <span class="text-danger">{{ $message }} !</span>
-                        @enderror
-                    </div>
+                <div class="form-group row align-items-center">
+                    @error('username')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+                <label class="col-md-4 text-md-right text-left">Username</label>
+                <div class="col-lg-6 col-md-6">
+                    <input type="text" name="username" class="form-control" value="` + data.username + `">
                 </div>
             </div>
+
+              <div class="form-group row align-items-center">
+                  @error('password')
+                <div class="alert alert-danger">{{ $message }}</div>
+                  @enderror
+                <label class="col-md-4 text-md-right text-left">Password</label>
+                <div class="col-lg-6 col-md-6">
+                  <input type="paswword" value="" name="password" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group row align-items-center">
+                @error('role')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+                <label class="col-md-4 text-md-right text-left">Role</label>
+                <div class="col-lg-6 col-md-6">
+                  <select class="form-control selectric" value="` + data.role + `" name="role">
+                        <option selected hidden>Pilih</option>
+                        <option value="admin">Admin</option>
+                        <option value="super admin">Super Admin</option>
+                    </select>
+                </div>    
            `);
-           $('#pesanid').val(data.pesan);
             })
         });
     });

@@ -57,10 +57,12 @@
             <a href="#">S-N</a>
           </div>
           <ul class="sidebar-menu">
-            @if (Auth::user()->role == 'superadmin')
+            @if (Auth::user()->role == 'super admin')
             <li class="menu-header">Dashboard</li>
             <li><a class=" {{ Route::is('home.index') ? 'active' : '' }} " href=" {{Route('home')}}">
                 <i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
+            <li><a class=" {{ Route::is('super.index') ? 'active' : '' }} " href=" {{Route('super.index')}}">
+                <i class="fas fa-user-circle"></i> <span>Account</span></a></li>
             <li class="menu-header">page 1</li>
             <li class="dropdown">
               <a href="#" class="nav-link has-dropdown"><i class="fas fa-car-alt"></i> <span>Kendaraan</span></a>
