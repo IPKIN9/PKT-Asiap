@@ -77,4 +77,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::patch('update/{id}', 'StatusPengirimanController@update')->name('status.update');
         Route::delete('delete/{id}', 'StatusPengirimanController@destroy')->name('status.destroy');
     });
+    Route::prefix('super/')->group(function () {
+        Route::get('show/', 'SuperAdminController@index')->name('super.index');
+        Route::post('inserting/', 'SuperAdminController@insert')->name('super.insert');
+        Route::get('edit/{id}', 'SuperAdminController@edit_data')->name('super.edit');
+        Route::patch('update/{id}', 'SuperAdminController@update')->name('super.update');
+        Route::delete('delete/{id}', 'SuperAdminController@destroy')->name('super.destroy');
+    });
 });

@@ -88,7 +88,7 @@
                                             <label for="role">Role</label>
                                             <select class="form-control form-control-lg" name="role">
                                                 <option value="admin">Admin</option>
-                                                <option value="superadmin">Super Admin</option>
+                                                <option value="super admin">Super Admin</option>
                                             </select>
                                         </div>
                                     </div>
