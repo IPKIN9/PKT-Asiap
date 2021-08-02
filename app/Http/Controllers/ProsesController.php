@@ -41,7 +41,7 @@ class ProsesController extends Controller
     {
 
         $data = array(
-            'no_resi' => Str::random(15),
+            'no_resi' => Str::random(12),
             'pengirim_id' => $request->input('pengirim_id'),
             'asal_id' => $request->input('asal_id'),
             'tujuan_id' => $request->input('tujuan_id'),

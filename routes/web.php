@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+Route::get('landing', 'LandingController@index')->name('landing');
 
 //Login & Register
 Route::get('/', 'AuthController@showFormLogin')->name('login');

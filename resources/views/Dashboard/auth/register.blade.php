@@ -91,11 +91,21 @@
                                                 <option value="super admin">Super Admin</option>
                                             </select>
                                         </div>
+
+                                        <div class="form-group col-6">
+                                            <label for="tujuan_id">Lokasi</label>
+                                            <select name="tujuan_id" class="form-control form-control-lg">
+                                                <option selected disabled>Pilih</option>
+                                                <option value="" selected="selected"> </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            @error('tujuan_id')
+                                            <span class="text-danger">{{ $message }} !</span>
+                                            @enderror
+                                        </div>
                                     </div>
                             </div>
-
-
-
 
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary btn-lg btn-block">
