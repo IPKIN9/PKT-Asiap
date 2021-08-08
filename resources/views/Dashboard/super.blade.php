@@ -32,17 +32,19 @@
                                     <th>Name</th>
                                     <th>Username</th>
                                     <th>Role</th>
+                                    <th>Cabang</th>
                                     <th>Created at</th>
                                     <th>Updated at</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($data as $d)
+                                @foreach($data['user'] as $d)
                                 <tr>
                                     <th>{{$d->name}}</th>
                                     <th>{{$d->username}}</th>
                                     <th>{{$d->role}}</th>
+                                    <th>{{$d->lokasi_rol->cabang}}</th>
                                     <th>{{date('d-m-Y', strtotime($d->created_at))}}</th>
                                     <th>{{date('d-m-Y', strtotime($d->updated_at))}}</th>
                                     <th>
@@ -63,6 +65,7 @@
                                     <th>Name</th>
                                     <th>Username</th>
                                     <th>Role</th>
+                                    <th>Cabang</th>
                                     <th>Created at</th>
                                     <th>Updated at</th>
                                     <th>Action</th>
@@ -118,6 +121,17 @@
                                                             <option selected hidden>Pilih</option>
                                                             <option value="admin">Admin</option>
                                                             <option value="super admin">Super Admin</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row align-items-center">
+                                                    <label class="col-md-4 text-md-right text-left">Cabang</label>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <select class="form-control selectric" name="id_lokasi">
+                                                            <option selected hidden>Pilih</option>
+                                                            @foreach ($data['lokasi'] as $d)
+                                                            <option value="{{$d->id}}">{{$d->cabang}}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
@@ -188,50 +202,64 @@
                 $('#myModal').modal('show');
                 $('#modalContent').html('');
                 $('#modalContent').append(`
-            <div class="wizard-pane">
-              <div class="form-group row align-items-center">
-                @error('name')
-                <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-                <label class="col-md-4 text-md-right text-left">Username</label>
-                <div class="col-lg-6 col-md-6">
-                  <input type="hidden" id="data_id" value="` + data.id + `" name="id" class="form-control">
-                  <input type="text" value="` + data.name + `" name="name" class="form-control">
+                <div class="wizard-pane">
+                    <div class="form-group row align-items-center">
+                        @error('name')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                        <label class="col-md-4 text-md-right text-left">Username</label>
+                        <div class="col-lg-6 col-md-6">
+                        <input type="hidden" id="data_id" value="` + data.id + `" name="id" class="form-control">
+                        <input type="text" value="` + data.name + `" name="name" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row align-items-center">
+                        @error('username')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                    <label class="col-md-4 text-md-right text-left">Username</label>
+                    <div class="col-lg-6 col-md-6">
+                        <input type="text" name="username" class="form-control" value="` + data.username + `">
+                    </div>
                 </div>
-              </div>
+
                 <div class="form-group row align-items-center">
-                    @error('username')
-                <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-                <label class="col-md-4 text-md-right text-left">Username</label>
-                <div class="col-lg-6 col-md-6">
-                    <input type="text" name="username" class="form-control" value="` + data.username + `">
+                    @error('password')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                    <label class="col-md-4 text-md-right text-left">Password</label>
+                    <div class="col-lg-6 col-md-6">
+                    <input type="paswword" value="" name="password" class="form-control">
+                    </div>
                 </div>
-            </div>
 
-              <div class="form-group row align-items-center">
-                  @error('password')
-                <div class="alert alert-danger">{{ $message }}</div>
-                  @enderror
-                <label class="col-md-4 text-md-right text-left">Password</label>
-                <div class="col-lg-6 col-md-6">
-                  <input type="paswword" value="" name="password" class="form-control">
-                </div>
-            </div>
-
-            <div class="form-group row align-items-center">
-                @error('role')
-                <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-                <label class="col-md-4 text-md-right text-left">Role</label>
-                <div class="col-lg-6 col-md-6">
-                  <select class="form-control selectric" value="` + data.role + `" name="role">
+                <div class="form-group row align-items-center">
+                    @error('role')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                    <label class="col-md-4 text-md-right text-left">Role</label>
+                    <div class="col-lg-6 col-md-6">
+                    <select class="form-control selectric" id="role_edit" name="role">
                         <option selected hidden>Pilih</option>
                         <option value="admin">Admin</option>
                         <option value="super admin">Super Admin</option>
                     </select>
-                </div>    
+                </div>  
+                
+                <div class="form-group row align-items-center">
+                    <label class="col-md-4 text-md-right text-left">Lokasi</label>
+                    <div class="col-lg-6 col-md-6">
+                        <select class="form-control selectric" id="lokasi" name="id_lokasi">
+                            <option selected hidden>Pilih</option>
+                            @foreach ($data['lokasi'] as $d)
+                            <option value="{{$d->id}}">{{$d->cabang}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
            `);
+           $('#role_edit').val(data.role);
+           $('#lokasi').val(data.id_lokasi);
             })
         });
     });

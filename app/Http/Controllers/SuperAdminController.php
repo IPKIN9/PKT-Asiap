@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\SuperAdminModel;
+use App\Model\LokasiModel;
+use App\Model\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -11,7 +13,10 @@ class SuperAdminController extends Controller
 {
     public function index()
     {
-        $data = SuperAdminModel::all();
+        $data = array(
+            'user' => User::with('lokasi_rol')->get(),
+            'lokasi' => LokasiModel::all(),
+        );
         return view('Dashboard.super')->with('data', $data);
     }
 
@@ -19,7 +24,7 @@ class SuperAdminController extends Controller
     {
         $request->validate([
             'name' => 'required|min:3|max:35',
-            'username' => 'required|unique:super_admin',
+            'username' => 'required|unique:users,username',
             'password' => 'required',
             'role' => 'required',
         ]);
@@ -28,17 +33,18 @@ class SuperAdminController extends Controller
             'username' => $request->input('username'),
             'password' => Hash::make($request->password),
             'role' => $request->input('role'),
+            'id_lokasi' => $request->input('id_lokasi'),
             'created_at' => now(),
             'updated_at' => now(),
         );
-        DB::table('super_admin')->insert($data);
+        DB::table('users')->insert($data);
         return redirect(route('super.index'))->with('status', 'Data Tersimpan');
     }
 
     public function edit_data($id)
     {
         $where = array('id' => $id);
-        $post  = SuperAdminModel::where($where)->first();
+        $post  = User::where($where)->first();
 
         return response()->json($post);
     }
@@ -50,15 +56,20 @@ class SuperAdminController extends Controller
             'username' => $request->input('username'),
             'password' => Hash::make($request->password),
             'role' => $request->input('role'),
+            'id_lokasi' => $request->input('id_lokasi'),
             'updated_at' => now()
         );
-        SuperAdminModel::where('id', $id)->update($data);
+        User::where('id', $id)->update($data);
         return response()->json($data);
     }
 
     public function destroy($id)
     {
-        $post = SuperAdminModel::where('id', $id)->delete();
+        $user = Auth::user()->id;
+        if ($id == $user) {
+            return response()->json("error", 500);
+        }
+        $post = User::where('id', $id)->delete();
         return response()->json($post);
     }
 }

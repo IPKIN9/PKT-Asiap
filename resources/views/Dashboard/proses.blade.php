@@ -115,7 +115,8 @@
                                                 </div>
                                                 <div class="form-group row align-items-center">
                                                     <label class="col-md-4 text-md-right text-left">Asal</label>
-                                                    <select name="asal_id" class="col-lg-6 col-md-6 form-control">
+                                                    <select name="asal_id" id="asal_user"
+                                                        class="col-lg-6 col-md-6 form-control">
                                                         <option selected disabled>Pilih</option>
                                                         @foreach ($data['lokasi'] as $d)
                                                         <option value="{{$d->id}}" @if (old('asal_id')==$d->id)
@@ -141,16 +142,6 @@
                                                     <div class="col-md-4"></div>
                                                     <div class="col-lg-6 col-md-6">
                                                         @error('tujuan_id')
-                                                        <span class="text-danger">{{ $message }} !</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row align-items-center">
-                                                    <label class="col-md-4 text-md-right text-left">Nomor Hp</label>
-                                                    <div class="col-lg-6 col-md-6">
-                                                        <input type="text" name="no_hp" value="{{old('no_hp')}}"
-                                                            class="form-control">
-                                                        @error('no_hp')
                                                         <span class="text-danger">{{ $message }} !</span>
                                                         @enderror
                                                     </div>
@@ -317,12 +308,6 @@
                                     </select>
                                 </div>
                                 <div class="form-group row align-items-center">
-                                    <label class="col-md-4 text-md-right text-left">Nomor Hp</label>
-                                    <div class="col-lg-6 col-md-6">
-                                        <input type="text" name="no_hp" id="no_hp" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group row align-items-center">
                                     <label class="col-md-4 text-md-right text-left mt-2">Keterangan</label>
                                     <div class="col-lg-6 col-md-6">
                                         <textarea class="form-control" name="ket" id="ket"></textarea>
@@ -401,6 +386,8 @@
         $('#myTable').DataTable({
             responsive:true
         });
+        let asal = {{Auth::user()->id_lokasi}};
+        $('#asal_user').val(asal);
     });
 </script>
 <script>

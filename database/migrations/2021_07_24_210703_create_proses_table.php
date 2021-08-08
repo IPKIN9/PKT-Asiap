@@ -25,7 +25,6 @@ class CreateProsesTable extends Migration
             $table->foreignId('tujuan_id')
                 ->constrained('lokasi')
                 ->onDelete('cascade');
-            $table->string('no_hp');
             $table->string('ket');
             $table->foreignId('supir_id')
                 ->constrained('supir')

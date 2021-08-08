@@ -87,8 +87,8 @@
                                         <div class="form-group col-6">
                                             <label for="role">Role</label>
                                             <select class="form-control form-control-lg" name="role">
-                                                <option value="admin">Admin</option>
-                                                <option value="super admin">Super Admin</option>
+                                                <option value="Admin">Admin</option>
+                                                <option value="Super Admin">Super Admin</option>
                                             </select>
                                         </div>
                                     </div>

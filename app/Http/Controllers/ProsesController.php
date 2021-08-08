@@ -10,6 +10,7 @@ use App\Model\ProsesModel;
 use App\Model\StatusPengirimanModel;
 use App\Model\SupirModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -45,7 +46,6 @@ class ProsesController extends Controller
             'pengirim_id' => $request->input('pengirim_id'),
             'asal_id' => $request->input('asal_id'),
             'tujuan_id' => $request->input('tujuan_id'),
-            'no_hp' => $request->input('no_hp'),
             'ket' => $request->input('ket'),
             'supir_id' => $request->input('supir_id'),
             'mobil_id' => $request->input('mobil_id'),
@@ -74,7 +74,6 @@ class ProsesController extends Controller
             'pengirim_id' => $request->input('pengirim_id'),
             'asal_id' => $request->input('asal_id'),
             'tujuan_id' => $request->input('tujuan_id'),
-            'no_hp' => $request->input('no_hp'),
             'ket' => $request->input('ket'),
             'supir_id' => $request->input('supir_id'),
             'mobil_id' => $request->input('mobil_id'),

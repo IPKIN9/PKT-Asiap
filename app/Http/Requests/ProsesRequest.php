@@ -19,7 +19,7 @@ class ProsesRequest extends FormRequest
             'pengirim_id' => 'required',
             'asal_id' => 'required',
             'tujuan_id' => 'required',
-            'no_hp' => 'required',
+            'hp' => 'required',
             'ket' => 'required',
             'supir_id' => 'required',
             'mobil_id' => 'required',
