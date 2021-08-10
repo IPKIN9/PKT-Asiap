@@ -91,46 +91,43 @@
                                         <form class="wizard-content mt-2">
                                             <div class="wizard-pane">
                                                 <div class="form-group row align-items-center">
-                                                    @error('nama')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
                                                     <label class="col-md-4 text-md-right text-left">Nama
                                                         Pengirim</label>
                                                     <div class="col-lg-6 col-md-6">
                                                         <input type="text" name="nama" class="form-control">
                                                     </div>
-                                                </div>
-                                                <div class="form-group row align-items-center">
-                                                    @error('hp')
+                                                    @error('nama')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
+                                                </div>
+                                                <div class="form-group row align-items-center">
                                                     <label class="col-md-4 text-md-right text-left">Nomor Hp</label>
                                                     <div class="col-lg-6 col-md-6">
                                                         <input type="text" name="hp" class="form-control">
                                                     </div>
-                                                </div>
-                                                <div class="form-group row align-items-center">
-                                                    @error('barang')
+                                                    @error('hp')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
+                                                </div>
+                                                <div class="form-group row align-items-center">
                                                     <label class="col-md-4 text-md-right text-left">Barang</label>
                                                     <div class="col-lg-6 col-md-6">
                                                         <input type="text" name="barang" class="form-control">
                                                     </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    @error('alamat')
+                                                    @error('barang')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
+                                                </div>
+                                                <div class="form-group row">
                                                     <label class="col-md-4 text-md-right text-left mt-2">Alamat</label>
                                                     <div class="col-lg-6 col-md-6">
                                                         <textarea class="form-control" name="alamat"></textarea>
                                                     </div>
-                                                </div>
-                                                <div class="form-group row align-items-center">
-                                                    @error('berat')
+                                                    @error('alamat')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
+                                                </div>
+                                                <div class="form-group row align-items-center">
                                                     <label class="col-md-4 text-md-right text-left">Berat</label>
                                                     <div class="col-lg-6 col-md-6">
                                                         <input type="number" name="berat" class="form-control">
@@ -138,15 +135,21 @@
                                                     <span>
                                                         <p>Kg</p>
                                                     </span>
+                                                    <div class="col-md-4"></div>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        @error('berat')
+                                                        <span class="alert text-danger">{{ $message }} !</span>
+                                                        @enderror
+                                                    </div>
                                                 </div>
                                                 <div class="form-group row align-items-center">
-                                                    @error('jumlah')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
                                                     <label class="col-md-4 text-md-right text-left">jumlah</label>
                                                     <div class="col-lg-6 col-md-6">
                                                         <input type="number" name="jumlah" class="form-control">
                                                     </div>
+                                                    @error('jumlah')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group row">
                                                     <div class="col-md-4"></div>

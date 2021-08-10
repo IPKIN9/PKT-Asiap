@@ -79,9 +79,6 @@
                                         <form class="wizard-content mt-2">
                                             <div class="wizard-pane">
                                                 <div class="form-group row align-items-center">
-                                                    @error('type')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
                                                     <label class="col-md-4 text-md-right text-left">Type</label>
                                                     <div class="col-lg-6 col-md-6">
                                                         <select class="form-control selectric" name="type">
@@ -90,6 +87,9 @@
                                                             <option value="berangkat">Berangkat</option>
                                                         </select>
                                                     </div>
+                                                    @error('type')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group row">
                                                     <label class="col-md-4 text-md-right text-left mt-2">Pesan</label>

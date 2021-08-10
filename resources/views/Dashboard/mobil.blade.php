@@ -79,22 +79,22 @@
                                         <form class="wizard-content mt-2">
                                             <div class="wizard-pane">
                                                 <div class="form-group row align-items-center">
-                                                    @error('plat')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
                                                     <label class="col-md-4 text-md-right text-left">No.DN</label>
                                                     <div class="col-lg-6 col-md-6">
                                                         <input type="text" name="plat" class="form-control">
                                                     </div>
-                                                </div>
-                                                <div class="form-group row align-items-center">
-                                                    @error('type')
+                                                    @error('plat')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
+                                                </div>
+                                                <div class="form-group row align-items-center">
                                                     <label class="col-md-4 text-md-right text-left">Type</label>
                                                     <div class="col-lg-6 col-md-6">
                                                         <input type="text" name="type" class="form-control">
                                                     </div>
+                                                    @error('type')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group row">
                                                     <div class="col-md-4"></div>

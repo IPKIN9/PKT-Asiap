@@ -82,28 +82,25 @@
                                         <form class="wizard-content mt-2">
                                             <div class="wizard-pane">
                                                 <div class="form-group row align-items-center">
-                                                    @error('nama')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
                                                     <label class="col-md-4 text-md-right text-left">Nama
                                                         Supir</label>
                                                     <div class="col-lg-6 col-md-6">
                                                         <input type="text" name="nama" class="form-control">
                                                     </div>
-                                                </div>
-                                                <div class="form-group row align-items-center">
-                                                    @error('hp')
+                                                    @error('nama')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
+                                                </div>
+                                                <div class="form-group row align-items-center">
                                                     <label class="col-md-4 text-md-right text-left">Nomor Hp</label>
                                                     <div class="col-lg-6 col-md-6">
                                                         <input type="text" name="hp" class="form-control">
                                                     </div>
-                                                </div>
-                                                <div class="form-group row align-items-center">
-                                                    @error('jk')
+                                                    @error('hp')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
+                                                </div>
+                                                <div class="form-group row align-items-center">
                                                     <label class="col-md-4 text-md-right text-left">jenis
                                                         Kelamin</label>
                                                     <div class="col-lg-6 col-md-6">
@@ -112,6 +109,9 @@
                                                             <option value="perempuan">Perempuan</option>
                                                         </select>
                                                     </div>
+                                                    @error('jk')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
                                                 </div>
 
                                                 <div class="form-group row">

@@ -85,31 +85,31 @@
                                         <form class="wizard-content mt-2">
                                             <div class="wizard-pane">
                                                 <div class="form-group row align-items-center">
-                                                    @error('name')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
                                                     <label class="col-md-4 text-md-right text-left">name</label>
                                                     <div class="col-lg-6 col-md-6">
                                                         <input type="text" name="name" class="form-control">
                                                     </div>
-                                                </div>
-                                                <div class="form-group row align-items-center">
-                                                    @error('username')
+                                                    @error('name')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
+                                                </div>
+                                                <div class="form-group row align-items-center">
                                                     <label class="col-md-4 text-md-right text-left">Username</label>
                                                     <div class="col-lg-6 col-md-6">
                                                         <input type="text" name="username" class="form-control">
                                                     </div>
-                                                </div>
-                                                <div class="form-group row align-items-center">
-                                                    @error('password')
+                                                    @error('username')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                     @enderror
+                                                </div>
+                                                <div class="form-group row align-items-center">
                                                     <label class="col-md-4 text-md-right text-left">Password</label>
                                                     <div class="col-lg-6 col-md-6">
                                                         <input type="password" name="password" class="form-control">
                                                     </div>
+                                                    @error('password')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group row align-items-center">
                                                     @error('role')
