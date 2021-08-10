@@ -19,9 +19,6 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();
             $table->string('password');
             $table->string('role');
-            $table->foreignId('tujuan_id')
-                ->constrained('lokasi')
-                ->onDelete('cascade');
             $table->timestamps();
         });
     }
