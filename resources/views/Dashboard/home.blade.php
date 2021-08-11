@@ -14,9 +14,6 @@
     <div class="card">
       <div class="card-header">
         <h4>Invoices</h4>
-        <div class="card-header-action">
-          <a href="{{route('kirim.index')}}" class="btn btn-danger">View More <i class="fas fa-chevron-right"></i></a>
-        </div>
       </div>
       <div class="card-body p-0">
         <div class="table-responsive table-invoice">
@@ -27,6 +24,7 @@
                 <th>Pengirim</th>
                 <th>Asal</th>
                 <th>Tujuan</th>
+                <th>Status</th>
               </tr>
               @foreach ($data['proses'] as $d)
               <tr>
@@ -36,7 +34,10 @@
                   <div class="badge badge-success">{{$d->asal_rol->cabang}}</div>
                 </td>
                 <td>
-                  <div class="badge badge-warning">{{$d->tujuan_rol->cabang}}</div>
+                  <div class="">{{$d->alamat}}</div>
+                </td>
+                <td>
+                  <div class="badge badge-info">{{$d->status_rol->status_pengiriman}}</div>
                 </td>
               </tr>
               @endforeach

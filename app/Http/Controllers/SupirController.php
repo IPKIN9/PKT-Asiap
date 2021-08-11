@@ -18,7 +18,7 @@ class SupirController extends Controller
     {
         $request->validate([
             'nama' => 'required|max:50',
-            'hp' => 'required|max:12|min:10',
+            'hp' => 'required|max:15|min:10',
             'jk' => 'required',
         ]);
 

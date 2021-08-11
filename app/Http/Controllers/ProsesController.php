@@ -12,7 +12,6 @@ use App\Model\SupirModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class ProsesController extends Controller
 {
@@ -20,21 +19,41 @@ class ProsesController extends Controller
 
     public function index()
     {
-        $data = array(
-            'pengirim' => PengirimModel::get(),
-            'supir' => SupirModel::get(),
-            'mobil' => MobilModel::get(),
-            'lokasi' => LokasiModel::get(),
-            'status' => StatusPengirimanModel::get(),
-            'proses' => ProsesModel::with(
-                'pengirim_rol',
-                'asal_rol',
-                'tujuan_rol',
-                'supir_rol',
-                'mobil_rol',
-                'status_rol'
-            )->get(),
-        );
+        $role = Auth::user()->role;
+        $cbg = Auth::user()->id_lokasi;
+        if ($role == 'admin') {
+            $data = array(
+                'pengirim' => PengirimModel::get(),
+                'supir' => SupirModel::get(),
+                'mobil' => MobilModel::get(),
+                'lokasi' => LokasiModel::get(),
+                'status' => StatusPengirimanModel::get(),
+                'proses' => ProsesModel::where('asal_id', $cbg)->with(
+                    'pengirim_rol',
+                    'asal_rol',
+                    'tujuan_rol',
+                    'supir_rol',
+                    'mobil_rol',
+                    'status_rol'
+                )->get(),
+            );
+        } else {
+            $data = array(
+                'pengirim' => PengirimModel::get(),
+                'supir' => SupirModel::get(),
+                'mobil' => MobilModel::get(),
+                'lokasi' => LokasiModel::get(),
+                'status' => StatusPengirimanModel::get(),
+                'proses' => ProsesModel::with(
+                    'pengirim_rol',
+                    'asal_rol',
+                    'tujuan_rol',
+                    'supir_rol',
+                    'mobil_rol',
+                    'status_rol'
+                )->get(),
+            );
+        }
         return view('Dashboard.proses')->with('data', $data);
     }
 
