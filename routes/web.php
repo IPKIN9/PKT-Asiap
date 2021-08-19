@@ -24,6 +24,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('home', 'DashboardController@index')->name('home');
     Route::get('logout', 'AuthController@logout')->name('logout');
+    Route::patch('update/{id}', 'DashboardController@update');
 
     Route::prefix('Pengirim/')->group(function () {
         Route::get('show/', 'PengirimController@index')->name('pengirim.index');

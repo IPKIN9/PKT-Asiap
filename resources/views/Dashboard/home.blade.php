@@ -17,7 +17,7 @@
       </div>
       <div class="card-body p-0">
         <div class="table-responsive table-invoice">
-          <table id="myTable" class="table table-striped table-bordered">
+          <table id="table_status" class="table table-striped table-bordered">
             <thead>
               <tr>
                 <th>Resi</th>
@@ -25,6 +25,7 @@
                 <th>Asal</th>
                 <th>Tujuan</th>
                 <th>Status</th>
+                <th>Update</th>
               </tr>
             </thead>
             <tbody>
@@ -41,6 +42,12 @@
                 <th>
                   <div class="badge badge-info">{{$d->status_rol->status_pengiriman}}</div>
                 </th>
+                <th>
+                  <div class=""><button type="button" data-id="{{$d->id}}"
+                      class="btn_update btn-sm btn btn-icon btn-success">
+                      <i class="fas fa-info-circle"></i> Update
+                    </button></div>
+                </th>
               </tr>
               @endforeach
             </tbody>
@@ -51,6 +58,7 @@
                 <th>Asal</th>
                 <th>Tujuan</th>
                 <th>Status</th>
+                <th>Update</th>
               </tr>
             </tfoot>
           </table>
@@ -95,7 +103,47 @@
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           }
       });
-      $('#myTable').DataTable();
+      $('#table_status').DataTable();
+      $(document).on('click', '.btn_update', function () {
+        let dataId = $(this).data('id');
+        Swal.fire({
+        title: 'Update Status?',
+        text: "Konfirmasi barang telah di terima oleh kantor?",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, update it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "update/" + dataId, //eksekusi ajax ke url ini
+                    type: 'PATCH',
+                    success: function () {
+                        Swal.fire(
+                        'Update!',
+                        'Data berhasl di update dan pesan berhasil terkirim.',
+                        'success'
+                        );
+                        setTimeout(function(){
+                        location.reload();
+                        },1000);
+                    },
+                    error: function () {
+                        Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                        footer: '<a href>Why do I have this issue?</a>'
+                        });
+                        // setTimeout(function(){
+                        // location.reload();
+                        // },1000);
+                    }
+                })
+            }
+        })
+    });
   });
 </script>
 @endsection
