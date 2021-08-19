@@ -17,8 +17,8 @@
       </div>
       <div class="card-body p-0">
         <div class="table-responsive table-invoice">
-          <table class="table table-striped">
-            <tbody>
+          <table id="myTable" class="table table-striped table-bordered">
+            <thead>
               <tr>
                 <th>Resi</th>
                 <th>Pengirim</th>
@@ -26,22 +26,33 @@
                 <th>Tujuan</th>
                 <th>Status</th>
               </tr>
+            </thead>
+            <tbody>
               @foreach ($data['proses'] as $d)
               <tr>
-                <td><a href="#">{{$d->no_resi}}</a></td>
-                <td class="font-weight-600">{{$d->pengirim_rol->nama}}</td>
-                <td>
+                <th>{{$d->no_resi}}</th>
+                <th class="font-weight-600">{{$d->pengirim_rol->nama}}</th>
+                <th>
                   <div class="badge badge-success">{{$d->asal_rol->cabang}}</div>
-                </td>
-                <td>
-                  <div class="">{{$d->alamat}}</div>
-                </td>
-                <td>
+                </th>
+                <th>
+                  <div class="badge badge-warning">{{$d->tujuan_rol->cabang}}</div>
+                </th>
+                <th>
                   <div class="badge badge-info">{{$d->status_rol->status_pengiriman}}</div>
-                </td>
+                </th>
               </tr>
               @endforeach
             </tbody>
+            <tfoot>
+              <tr>
+                <th>Resi</th>
+                <th>Pengirim</th>
+                <th>Asal</th>
+                <th>Tujuan</th>
+                <th>Status</th>
+              </tr>
+            </tfoot>
           </table>
         </div>
       </div>
@@ -75,4 +86,16 @@
     </div>
   </div>
 </div>
+@endsection
+@section('js')
+<script>
+  $(document).ready(function () {
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+      $('#myTable').DataTable();
+  });
+</script>
 @endsection
