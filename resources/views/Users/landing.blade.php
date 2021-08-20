@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Techie Bootstrap Template - Index</title>
+    <title>Si-Notif Interface</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -39,13 +39,13 @@
 
             <div class="row justify-content-center">
                 <div class="col-xl-9 d-flex align-items-center">
-                    <h1 class="logo mr-auto"><a href="index.html">Si-Notif</a></h1>
+                    <h1 class="logo mr-auto"><a>Si-Notif</a></h1>
                     <!-- Uncomment below if you prefer to use an image logo -->
                     <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
                     <nav class="nav-menu d-none d-lg-block">
                         <ul>
-                            <li class="active"><a href="index.html">Cek Resi</a></li>
+                            <li class="active"><a href="#hero">Cek Resi</a></li>
                             <li><a href="#about">Tentang</a></li>
 
                         </ul>
@@ -63,7 +63,7 @@
             <div class="row justify-content-center">
                 <div
                     class="col-xl-5 col-lg-6 pt-3 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-                    <h1>Pengirimanmu Aman, Cari Posisinya</h1>
+                    <h1>Paketmu Aman Cari Posisinya</h1>
                     <h2>Masukkan NOMOR RESI atau AWB atau KODE BOOKING</h2>
                     <br>
                     <div class="form-group">
