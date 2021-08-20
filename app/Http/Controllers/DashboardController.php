@@ -18,9 +18,14 @@ class DashboardController extends Controller
         $role = Auth::user()->role;
         $cbg = Auth::user()->id_lokasi;
         $date = Carbon::now()->toDateString();
+        $status = StatusPengirimanModel::where('status_pengiriman', 'tiba')->value('id');
+        $where = [
+            ['tujuan_id', $cbg],
+            ['status_id', '!=', $status]
+        ];
         if ($role == 'admin') {
             $data = array(
-                'proses' => ProsesModel::where('tujuan_id', $cbg)->get(),
+                'proses' => ProsesModel::where($where)->get(),
                 'today' => ProsesModel::where('created_at', $date)->get(),
                 'date' => $date,
             );
