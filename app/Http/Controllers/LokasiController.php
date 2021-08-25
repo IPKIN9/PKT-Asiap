@@ -11,7 +11,7 @@ class LokasiController extends Controller
     public function index()
     {
         $data = LokasiModel::all();
-        return view('Dashboard.lokasi')->with('data', $data);
+        return view('Dashboau8mumkrd.lokasi')->with('data', $data);
     }
 
     public function insert(Request $request)

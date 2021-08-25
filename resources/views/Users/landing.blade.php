@@ -4,14 +4,15 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Si-Notif Interface</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="web/assets/img/favicon.png" rel="icon">
-    <link href="web/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="{{ asset('web/assets/img/favicon.png') }}" rel="icon">
+    <link href="{{ asset('web/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link
@@ -19,15 +20,15 @@
         rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="web/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="web/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
-    <link href="web/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="web/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="web/assets/vendor/venobox/venobox.css" rel="stylesheet">
-    <link href="web/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="{{ asset('web/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('web/assets/vendor/icofont/icofont.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('web/assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('web/assets/vendor/owl.carousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('web/assets/vendor/venobox/venobox.css') }}" rel="stylesheet">
+    <link href="{{ asset('web/assets/vendor/aos/aos.css') }}" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="web/assets/css/style.css" rel="stylesheet">
+    <link href="{{ asset('web/assets/css/style.css') }}" rel="stylesheet">
 
 </head>
 
@@ -68,8 +69,8 @@
                     <br>
                     <div class="form-group">
                         <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-                            aria-describedby="search-addon" />
-                        <a href="#" class="btn-get-started scrollto">Cek Resi</a>
+                            aria-describedby="search-addon" id="search" />
+                        <a href="#" type="button" id="tb-search" class="btn-get-started scrollto">Cek Resi</a>
                     </div>
                 </div>
             </div>
@@ -83,12 +84,12 @@
             <div class="container" data-aos="fade-up">
 
                 <div class="section-title">
+                    <div id="table-search">
 
-
+                    </div>
                 </div>
             </div>
         </section><!-- End Portfolio Section -->
-
 
         <section id="about" class="about">
             <div class="container" data-aos="fade-up">
@@ -109,19 +110,68 @@
     <div id="preloader"></div>
 
     <!-- Vendor JS Files -->
-    <script src="web/assets/vendor/jquery/jquery.min.js"></script>
-    <script src="web/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="web/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
-    <script src="web/assets/vendor/php-email-form/validate.js"></script>
-    <script src="web/assets/vendor/waypoints/jquery.waypoints.min.js"></script>
-    <script src="web/assets/vendor/counterup/counterup.min.js"></script>
-    <script src="web/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
-    <script src="web/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="web/assets/vendor/venobox/venobox.min.js"></script>
-    <script src="web/assets/vendor/aos/aos.js"></script>
+    <script src="{{ asset('web/assets/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('web/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('web/assets/vendor/jquery.easing/jquery.easing.min.js') }}"></script>
+    <script src="{{ asset('web/assets/vendor/php-email-form/validate.js') }}"></script>
+    <script src="{{ asset('web/assets/vendor/waypoints/jquery.waypoints.min.js') }}"></script>
+    <script src="{{ asset('web/assets/vendor/counterup/counterup.min.js') }}"></script>
+    <script src="{{ asset('web/assets/vendor/owl.carousel/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('web/assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
+    <script src="{{ asset('web/assets/vendor/venobox/venobox.min.js') }}"></script>
+    <script src="{{ asset('web/assets/vendor/aos/aos.js') }}"></script>
 
     <!-- Template Main JS File -->
-    <script src="web/assets/js/main.js"></script>
+    <script src="{{ asset('web/assets/js/main.js') }}"></script>
+    <script>
+        $(document).ready(function(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $('body').on('click','#tb-search',function()
+            {
+                let resi = $('#search').val();
+                if (resi === '') {
+                    alert("Input tidak boleh kosong");
+                } else {
+                    let url = 'search/'+resi;
+                    $.get(url, function(result)
+                    {
+                        if (!$.trim(result.no_resi)) {
+                            $('#table-search').html('<h4>Data tidak di temukan</h4>');
+                            $('#search').val('');
+                            $('html, body').animate({
+                                scrollTop: $("#table-search").offset().top-200
+                            }, 2000, function(){$( "#table-search" ).focus();});
+                        } else {
+                            $('#table-search').html('');
+                            $('#table-search').append(`
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12 footer-contact">
+                                            <h3>No Resi: `+ result.no_resi +`</h3>
+                                            <p>
+                                                <strong>Nama Penerima: </strong>`+ result.pengirim_rol.nama +`<br>
+                                                <strong>Barang: </strong>`+ result.pengirim_rol.barang +`<br>
+                                                <strong>Alamat: </strong>`+ result.alamat +`<br>
+                                                <strong>Status: </strong>`+ result.status_rol.status_pengiriman +`<br><br>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            `);
+                            $('html, body').animate({
+                                scrollTop: $("#table-search").offset().top-200
+                            }, 2000, function(){$( "#table-search" ).focus();}); 
+                        }
+                    });
+                }
+                let url = "search/"+resi;
+            });
+        });
+    </script>
 
 </body>
 
