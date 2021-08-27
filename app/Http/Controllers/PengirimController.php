@@ -19,7 +19,7 @@ class PengirimController extends Controller
         $request->validate([
             'nama' => 'required|max:50',
             'alamat' => 'required',
-            'hp' => 'required|max:12|min:10',
+            'hp' => 'required|max:15|min:10',
             'barang' => 'required',
             'berat' => 'required',
             'jumlah' => 'required',
