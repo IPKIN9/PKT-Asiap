@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::prefix('landing')->group(function () {
+    Route::get('index', 'LandingController@index')->name('landing');
+    Route::get('search/{id}', 'LandingController@search_resi');
+});
 
 
 //Login & Register

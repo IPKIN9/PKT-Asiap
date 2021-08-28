@@ -16,7 +16,7 @@
                 @endif
             </div>
             <div class="card-header">
-                <h4>Data Proses Kirim</h4>
+                <h4>Data Kirim Paket~</h4>
             </div>
             <div class="card-body">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
